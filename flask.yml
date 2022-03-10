@@ -96,11 +96,11 @@
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
     mode: 0644
-    - name: Install Docker packages
+  - name: Install Docker packages
     yum:
       name: ['docker-ce','docker-ce-cli']
       state: present
-    - name: " Starting and Enabling Docker service"
+  - name: " Starting and Enabling Docker service"
     service:
     name: docker
     state: started
