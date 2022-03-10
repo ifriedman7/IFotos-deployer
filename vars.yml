@@ -1,12 +1,12 @@
 instance_type: t2.micro
 count: 1 # number of EC2 instances
-security_group: "Webapp 3000"
+security_group: SecGroup3000 # 
 load_balancer: ike-lb
-image: Centos7 #ami-c1cf79bc # Ubuntu 16.04
+image: Centos7 #ami-c1cf79bc # not Ubuntu 16.04
 keypair: Ike-key1 # EC2 AWS key pair name
 region: us-east-1
 infra_tags:
   app: IFotos
   type: web
 app_name: IFotos
-user: app
+user: ec2-user

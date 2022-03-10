@@ -4,7 +4,7 @@
   gather_facts: False
   vars_files:
     - vars.yml
-    - aws_keys.yml
+    - /home/ec2-user/ansible/aws_keys.yml
   tasks:
     - name: Create security group for EC2
       ec2_group:
@@ -23,7 +23,7 @@
             cidr_ip: 0.0.0.0/0
       register: sg
 
-    - name: Create the ELB listening on port 80
+    - name: Create the ELB listening on port 3000
       ec2_elb_lb:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
@@ -34,11 +34,11 @@
           - "{{ region }}a"
         listeners:
           - protocol: http
-            load_balancer_port: 80
-            instance_port: 80
+            load_balancer_port: 3000
+            instance_port: 3000
         health_check:
           ping_protocol: http
-          ping_port: 80
+          ping_port: 3000
           ping_path: "/"
           response_timeout: 5
           interval: 10
@@ -47,11 +47,11 @@
         tags: "{{ infra_tags }}"
       register: elb
 
-    - name: Launch new EC2 instances
-      ec2:
+    - name: Launch new EC2 instances Upgrade to "ec2_instance" module
+      ec2_instance:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        group_id: 
+        groups: 
           - "{{ sg.group_id }}"
           - "{{ elb.elb.security_group_ids | first }}"
         instance_type: "{{ instance_type }}"
@@ -74,7 +74,7 @@
       loop: "{{ ec2.instances }}"
 
 - hosts: remote
-  remote_user: ubuntu
+  remote_user: ec2-user
   become: yes
   become_method: sudo
   gather_facts: yes
@@ -82,35 +82,42 @@
     - vars.yml
   tasks:
   - name: Add Docker GPG key
-    apt_key: url=https://download.docker.com/linux/ubuntu/gpg
+    yum_key: url=https://download.docker.com/linux/centos/gpg
   - name: Install docker prerequisites
-    apt:
-      name: ['apt-transport-https','ca-certificates','curl','gnupg2','software-properties-common']
-      state: present
-      update_cache: yes
-  - name: Add Docker APT repository
-    apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/{{ansible_distribution|lower}} {{ansible_distribution_release}} stable
+    yum:
+    name: "{{ item }}"
+    state: latest
+    with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - name: "Configuring docker-ce repo"
+    get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    mode: 0644
   - name: Install Docker packages
-    apt:
+    yum:
       name: ['docker-ce','docker-ce-cli']
       state: present
   - name: Install Docker-compose 
-    shell: curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    shell: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     args:
       warn: false
 
   - name: Install packages
-    apt: name={{item}} state=present
+    yum: name={{item}} state=present
     loop:
       - python-setuptools
       - python3-pip
       - nginx
+      - git
   - name: Pip setup for ansible
     pip:
       name: 
        - docker
        - docker-compose
+       - flask-mysqldb
 
   - name: Copy app files
     copy:

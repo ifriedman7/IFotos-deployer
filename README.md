@@ -2,7 +2,7 @@
 
 ## Goal
 
-Deploy a python application to EC2 instances using Ansible
+Deploy a python application (IFotos) to EC2 instances using Ansible
 
 ## How does it work ?
 
@@ -10,6 +10,7 @@ Deploy a python application to EC2 instances using Ansible
 - Python application (Flask) files are copied to EC2 instances
 - The container is built and started using docker-compose
 - A Nginx process is started to redirect incoming traffic from port 80 to the docker container
+- - using port 3000 directly on the ELB - so far
 - Instances are then attached to the ELB
 
 ## Prerequisite
@@ -47,7 +48,7 @@ private_key_file = /Users/myself/key.pem
 ## Run
 
 - There are two playbook available :
-  - `flask.yml` will provision infratructure and deploy a containerized Python Flask application
+  - `flask.yml` will provision infrastructure and deploy a containerized Python Flask application
   - `clean.yml` will cleanup all infrastructure
 - To run theses playbooks, you can use make
 
@@ -59,4 +60,6 @@ make clean
 ## What could be done better
 
 - Python application container should be built outside the target instances and pushed to a registry
-- Flask built-in appliction server is not production grade, should be replaced it with a compliant WSGI server
+- - which is what I did: https://github.com/ifriedman7/IFotos.git
+- Flask built-in application server is not production grade, should be replaced it with a compliant WSGI server
+- - also did
