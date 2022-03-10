@@ -81,8 +81,8 @@
   vars_files:
     - vars.yml
   tasks:
-  - name: Add Docker GPG key
-    yum_key: url=https://download.docker.com/linux/centos/gpg
+#  - name: Add Docker GPG key
+#    yum_key: url=https://download.docker.com/linux/centos/gpg
   - name: Install docker prerequisites
     yum:
     name: "{{ item }}"
@@ -96,10 +96,15 @@
     url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
     mode: 0644
-  - name: Install Docker packages
+    - name: Install Docker packages
     yum:
       name: ['docker-ce','docker-ce-cli']
       state: present
+    - name: " Starting and Enabling Docker service"
+    service:
+    name: docker
+    state: started
+    enabled: yes
   - name: Install Docker-compose 
     shell: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     args:
@@ -119,10 +124,11 @@
        - docker-compose
        - flask-mysqldb
 
-  - name: Copy app files
-    copy:
-      src: python/
-      dest: /home/{{ user }}/{{ app_name }}
+#  - name: git pull IFotos
+#    copy:
+#      src: python/
+#      dest: /home/{{ user }}/{{ app_name }}
+	
   - name: Run the container
     docker_compose:
       project_src: /home/{{ user }}/{{ app_name }}
