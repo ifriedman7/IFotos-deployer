@@ -81,8 +81,8 @@
   vars_files:
     - vars.yml
   tasks:
-#  - name: Add Docker GPG key
-#    yum_key: url=https://download.docker.com/linux/centos/gpg
+  #  - name: Add Docker GPG key
+  #    yum_key: https://download.docker.com/linux/centos/gpg
   - name: Install docker prerequisites
     yum:
     name: "{{ item }}"
