@@ -5,7 +5,7 @@
   vars_files:
     - vars.yml
     - /home/ec2-user/ansible/aws_keys.yml
-
+  tasks:
     - name: Create security group for EC2
       ec2_group:
         aws_access_key: "{{ aws_access_key }}"
