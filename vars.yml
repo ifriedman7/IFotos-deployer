@@ -11,4 +11,4 @@ infra_tags:
 app_name: IFotos
 app_exe: IFotos/app.py
 user: ec2-user
-ansible_python_interpreter: /usr/local/bin/python
+ # ansible_python_interpreter: /usr/local/bin/python
