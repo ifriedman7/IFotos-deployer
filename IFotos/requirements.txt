@@ -4,7 +4,10 @@ pymysql
 Flask-MySQLdb
 flask-mysql
 boto
+botocore
 boto2
 boto3
 docker
 docker-compose
+ansible
+awscli
