@@ -125,7 +125,7 @@
        - docker-compose
        - flask-mysqldb
 
-    - name: git pull IFotos
+  - name: git pull IFotos
   #    copy:
   #      src: python/
   #      dest: /home/{{ user }}/{{ app_name }}
