@@ -24,7 +24,7 @@
       register: sg
 
     - name: Create the ELB listening on port 3000
-      ec2_elb_lb:
+      elb_classic_lb:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         name: "{{ load_balancer }}"
