@@ -3,3 +3,8 @@ mysqlclient
 pymysql
 Flask-MySQLdb
 flask-mysql
+boto
+boto2
+boto3
+docker
+docker-compose

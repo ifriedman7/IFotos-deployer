@@ -76,8 +76,8 @@ RUN yum -y install \
            python-rhsm \
            rootfiles \
            yum-utils \
-		   htop \
-		   httpd \
+           htop \
+           httpd \
            && yum clean all
 
 WORKDIR /IFotos
