@@ -129,8 +129,8 @@
   #    copy:
   #      src: python/
   #      dest: /home/{{ user }}/{{ app_name }}
-      get_url:
-      url: git pull https://github.com/ifriedman7/IFotos.git
+    get_url:
+    url: git pull https://github.com/ifriedman7/IFotos.git
     #  dest: /etc/yum.repos.d/docker-ce.repo
     #  mode: 0644
 
