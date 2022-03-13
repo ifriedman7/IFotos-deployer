@@ -115,7 +115,7 @@
         warn: false
 
     - name: Install packages
-      yum: name={{item}} state=present
+      yum:  # name={{item}} state=present
         loop:
         - python-setuptools
         - python3-pip
