@@ -51,16 +51,18 @@
       ec2_instance:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        groups: 
+        name: "IFotos Instance"
+        network:
+          groups: 
           - "{{ sg.group_id }}"
           - "{{ elb.elb.security_group_ids | first }}"
         instance_type: "{{ instance_type }}"
         image: "{{ image }}"
         wait: true 
         region: "{{ region }}"
-        keypair: "{{ keypair }}"
-        count: "{{ count }}"
-        instance_tags: "{{ infra_tags }}"
+        key_name: "{{ keypair }}"
+        # count: "{{ count }}" no longer supported
+        tags: "{{ infra_tags }}"
       register: ec2
 
     - name: Add EC2 instances to inventory
