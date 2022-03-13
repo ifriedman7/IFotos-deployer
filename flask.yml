@@ -128,8 +128,6 @@
       pip:
         name: 
         - boto3
-        - boto
-        - boto2
         - docker
         - docker-compose
         - flask-mysqldb
