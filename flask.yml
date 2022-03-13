@@ -5,14 +5,13 @@
   vars_files:
     - vars.yml
     - /home/ec2-user/ansible/aws_keys.yml
-  tasks:
-    - name: Pip setup for local deployer ansible
-      pip:
-        name: 
-        - boto3
-        - docker
-        - docker-compose
-        - flask-mysqldb
+ # tasks:
+ #   - name: Pip setup for local deployer ansible
+ #     pip:
+ #       name: 
+ #       - boto3
+ #       - docker
+ #       - docker-compose
     - name: Create security group for EC2
       ec2_group:
         aws_access_key: "{{ aws_access_key }}"
