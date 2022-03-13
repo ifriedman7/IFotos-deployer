@@ -117,6 +117,9 @@
     - name: Install packages
       yum:  # name={{item}} state=present
         loop:
+        - python
+        - python3
+        - python-devel
         - python-setuptools
         - python3-pip
         - nginx
@@ -124,6 +127,7 @@
     - name: Pip setup for ansible
       pip:
         name: 
+        # - boto3
         - docker
         - docker-compose
         - flask-mysqldb
