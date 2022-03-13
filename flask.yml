@@ -127,7 +127,7 @@
     - name: Pip setup for ansible
       pip:
         name: 
-        # - boto3
+        - boto3
         - docker
         - docker-compose
         - flask-mysqldb
