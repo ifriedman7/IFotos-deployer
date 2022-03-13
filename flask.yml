@@ -112,7 +112,7 @@
     - name: Install Docker-compose 
       shell: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         args:
-        warn: false
+          warn: false
 
     - name: Install packages
       yum: name={{item}} state=present
