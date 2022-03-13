@@ -1,7 +1,7 @@
 ---
 - hosts: local
   connection: local
-  gather_facts: False
+  gather_facts: false
   vars_files:
     - vars.yml
     - /home/ec2-user/ansible/aws_keys.yml
@@ -62,6 +62,7 @@
         count: "{{ count }}"
         instance_tags: "{{ infra_tags }}"
       register: ec2
+
     - name: Add EC2 instances to inventory
       add_host:
         name: "{{ item.public_ip }}"
@@ -124,14 +125,18 @@
        - docker-compose
        - flask-mysqldb
 
-#  - name: git pull IFotos
-#    copy:
-#      src: python/
-#      dest: /home/{{ user }}/{{ app_name }}
+    - name: git pull IFotos
+  #    copy:
+  #      src: python/
+  #      dest: /home/{{ user }}/{{ app_name }}
+      get_url:
+      url: git pull https://github.com/ifriedman7/IFotos.git
+    #  dest: /etc/yum.repos.d/docker-ce.repo
+    #  mode: 0644
 
   - name: Run the container
     docker_compose:
-      project_src: /home/{{ user }}/{{ app_name }}
+      project_src: /home/{{ user }}/{{ app_exe }}
       state: present
 
   - name: Create nginx config

@@ -9,4 +9,5 @@ infra_tags:
   app: IFotos
   type: web
 app_name: IFotos
+app_exe: IFotos/app.py
 user: ec2-user
