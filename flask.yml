@@ -82,11 +82,11 @@
   vars_files:
     - vars.yml
   tasks:
-  #  - name: Add Docker GPG key
-  #    get_url:
-  #    url: https://download.docker.com/linux/centos/gpg
-  #    dest: /etc/yum.repos.d/docker-gpg
-  #    mode: 0644
+    - name: Add Docker GPG key
+      get_url:
+      url: https://download.docker.com/linux/centos/gpg
+      dest: /etc/yum.repos.d/docker-gpg
+      mode: '644'
     - name: Install docker prerequisites
       yum:
       name: "{{ item }}"
@@ -99,7 +99,7 @@
       get_url:
       url: https://download.docker.com/linux/centos/docker-ce.repo
       dest: /etc/yum.repos.d/docker-ce.repo
-      mode: 0644
+      mode: '644'
     - name: Install Docker packages
       yum:
       name: ['docker-ce','docker-ce-cli']
