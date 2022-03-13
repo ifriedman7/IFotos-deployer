@@ -84,9 +84,9 @@
   tasks:
     - name: Add Docker GPG key
       get_url:
-      url: https://download.docker.com/linux/centos/gpg
-      dest: /etc/yum.repos.d/docker-gpg
-      mode: '644'
+        url: https://download.docker.com/linux/centos/gpg
+        dest: /etc/yum.repos.d/docker-gpg
+        mode: '644'
     - name: Install docker prerequisites
       yum:
       name: "{{ item }}"
