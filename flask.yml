@@ -96,22 +96,15 @@
       shell: 
         cmd: sudo rpm -Uvh --replacepkgs ./epel-release-latest-7.noarch.rpm
         warn: false
-    - name: yum install epel
-      yum:
-        name: epel-release
-        state: latest
-        update_cache: yes
-    - name: yum update
-      yum:
-        name: *
-        state: latest
-        update_cache: yes
+
     - name: Install docker prerequisites
       yum:
         name: 
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
+          - epel-release
+          - '*'
           - python
           - python-devel
           - python-setuptools
