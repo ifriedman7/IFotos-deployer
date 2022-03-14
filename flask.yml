@@ -67,7 +67,7 @@
 
     - name: Add EC2 instances to inventory
       add_host:
-        name: "{{ item.network_interfaces.association.public_ip }}"
+        name: "{{ item.public_ip_address }}"
         groups: remote
       loop: "{{ ec2.instances }}"
     - name: Wait for SSH to come up
