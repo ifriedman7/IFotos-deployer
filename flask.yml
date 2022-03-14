@@ -87,11 +87,6 @@
   vars_files:
     - vars.yml
   tasks:
-    - name: Add Docker GPG key
-      get_url:
-        url: https://download.docker.com/linux/centos/gpg
-        dest: /etc/yum.repos.d/docker-gpg
-        mode: 0644
     - name: Install docker prerequisites
       yum:
         name: "{{ item }}"
@@ -100,6 +95,14 @@
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
+        - libselinux-python3
+        - libselinux-python
+    - name: Add Docker GPG key
+      get_url:
+        url: https://download.docker.com/linux/centos/gpg
+        dest: /etc/yum.repos.d/docker-gpg
+        mode: 0644
+
     - name: "Configuring docker-ce repo"
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -129,7 +132,7 @@
         - python3-pip
         - nginx
         - git
-        - libselinux-python3
+
     - name: Pip setup for ansible
       pip:
         name: 
