@@ -87,12 +87,18 @@
   vars_files:
     - vars.yml
   tasks:
+    - name: "Download EPEL RPM"
+      get_url:
+        url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        dest: epel-release-latest-7.noarch.rpm
+        mode: 0644
     - name: Install docker prerequisites
       yum:
         name: 
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
+          - epel-release-latest-7.noarch.rpm
           - python
           - python-devel
           - python-setuptools
