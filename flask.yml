@@ -90,7 +90,7 @@
     - name: "Download EPEL RPM"
       get_url:
         url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-        dest: /home/maintuser/epel-release-latest-7.noarch.rpm
+        dest: ./epel-release-latest-7.noarch.rpm
         mode: 0644
     - name: Install docker prerequisites
       yum:
