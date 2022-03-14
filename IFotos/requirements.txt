@@ -9,3 +9,4 @@ docker
 docker-compose
 ansible
 awscli
+selinux

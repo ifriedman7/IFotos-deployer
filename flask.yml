@@ -129,6 +129,7 @@
         - python3-pip
         - nginx
         - git
+        - libselinux-python3
     - name: Pip setup for ansible
       pip:
         name: 
@@ -136,6 +137,7 @@
         - docker
         - docker-compose
         - flask-mysqldb
+        - selinux
 
     - name: git pull IFotos
   #    copy:
