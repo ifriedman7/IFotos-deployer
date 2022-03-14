@@ -89,14 +89,14 @@
   tasks:
     - name: Install docker prerequisites
       yum:
-        name: "{{ item }}"
+        name: 
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+          - libselinux-python3
+          - libselinux-python
         state: latest
-        with_items:
-        - yum-utils
-        - device-mapper-persistent-data
-        - lvm2
-        - libselinux-python3
-        - libselinux-python
+
     - name: Add Docker GPG key
       get_url:
         url: https://download.docker.com/linux/centos/gpg
@@ -124,23 +124,23 @@
 
     - name: Install packages
       yum:  # name={{item}} state=present
-        loop:
-        - python
-        - python3
-        - python-devel
-        - python-setuptools
-        - python3-pip
-        - nginx
-        - git
+        name:
+          - python
+          - python3
+          - python-devel
+          - python-setuptools
+          - python3-pip
+          - nginx
+          - git
 
     - name: Pip setup for ansible
       pip:
         name: 
-        - boto3
-        - docker
-        - docker-compose
-        - flask-mysqldb
-        - selinux
+          - boto3
+          - docker
+          - docker-compose
+          - flask-mysqldb
+          - selinux
 
     - name: git pull IFotos
   #    copy:
