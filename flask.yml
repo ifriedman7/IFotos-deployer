@@ -107,7 +107,7 @@
           - '*'
           - python
           - python-devel
-          - python-pip
+          - python2-pip
           - python-setuptools
           - nginx
           - git
