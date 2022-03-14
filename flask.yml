@@ -92,6 +92,10 @@
         url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         dest: ./epel-release-latest-7.noarch.rpm
         mode: 0644
+    - name: Install epel-release 
+      shell: 
+        cmd: sudo rpm -ivh ./epel-release-latest-7.noarch.rpm
+        warn: false
     - name: Install docker prerequisites
       yum:
         name: 
