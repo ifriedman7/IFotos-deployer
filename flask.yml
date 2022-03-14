@@ -93,6 +93,13 @@
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
+          - python
+          - python3
+          - python-devel
+          - python-setuptools
+          - python3-pip
+          - nginx
+          - git
           - libselinux-python3
           - libselinux-python
         state: latest
@@ -122,16 +129,9 @@
         cmd: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         warn: false
 
-    - name: Install packages
-      yum:  # name={{item}} state=present
-        name:
-          - python
-          - python3
-          - python-devel
-          - python-setuptools
-          - python3-pip
-          - nginx
-          - git
+ #   - name: Install packages
+ #     yum:  # name={{item}} state=present
+ #       name:
 
     - name: Pip setup for ansible
       pip:
