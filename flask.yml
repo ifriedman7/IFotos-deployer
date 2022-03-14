@@ -57,8 +57,8 @@
           - "{{ sg.group_id }}"
           - "{{ elb.elb.security_group_ids | first }}"
         security_groups:
-          - "{{ sg.group_id }}"
-          - "{{ elb.elb.security_group_ids | first }}"
+        - "{{ sg.group_id }}"
+        - "{{ elb.elb.security_group_ids | first }}"
         instance_type: "{{ instance_type }}"
         image_id: "{{ image }}"
         wait: true 
