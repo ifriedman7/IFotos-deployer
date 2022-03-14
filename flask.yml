@@ -116,13 +116,7 @@
           - libselinux-python3
         state: latest
         update_cache: yes
-    - name: Install python3
-      dnf:
-        name: 
-          - python3
-          - python3-pip
-          - libselinux-python3
-        state: latest
+
     - name: Add Docker GPG key
       get_url:
         url: https://download.docker.com/linux/centos/gpg
