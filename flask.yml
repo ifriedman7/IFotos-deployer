@@ -102,7 +102,7 @@
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
-          - epel-release-latest-7.noarch.rpm
+          - epel-release
           - python
           - python-devel
           - python-setuptools
@@ -113,6 +113,7 @@
           - python3-pip
           - libselinux-python3
         state: latest
+        update_cache: yes
     - name: Install python3
       dnf:
         name: 
