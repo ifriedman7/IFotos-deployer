@@ -103,7 +103,7 @@
           - device-mapper-persistent-data
           - lvm2
           - epel-release
-          - update
+          - *
           - python
           - python-devel
           - python-setuptools
