@@ -94,7 +94,7 @@
         mode: 0644
     - name: Install epel-release 
       shell: 
-        cmd: sudo rpm -Uvh ./epel-release-latest-7.noarch.rpm
+        cmd: sudo rpm -Uvh --replacepkgs ./epel-release-latest-7.noarch.rpm
         warn: false
     - name: Install docker prerequisites
       yum:
