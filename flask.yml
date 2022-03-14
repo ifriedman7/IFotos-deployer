@@ -11,7 +11,7 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         name: "{{ security_group }}"
-        description: "Webservers security group"
+        description: "ssh 22 security group"
         region: "{{ region }}"
         rules:
           - proto: tcp
