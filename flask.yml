@@ -67,7 +67,7 @@
 
     - name: Add EC2 instances to inventory
       add_host:
-        name: "{{ item.public_ip }}"
+        name: "{{ item.network_interfaces.association.public_ip }}"
         groups: remote
       loop: "{{ ec2.instances }}"
     - name: Wait for SSH to come up
@@ -77,7 +77,7 @@
       loop: "{{ ec2.instances }}"
 
 - hosts: remote
-  remote_user: ec2-user
+  remote_user: maintuser
   become: yes
   become_method: sudo
   gather_facts: yes
