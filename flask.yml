@@ -99,6 +99,9 @@
           - nginx
           - git
           - libselinux-python
+          - python3
+          - python3-pip
+          - libselinux-python3
         state: latest
     - name: Install python3
       dnf:
