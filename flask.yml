@@ -121,7 +121,6 @@
       yum:
         name: 
           - '*'
-          - python2-pip
         state: latest
     - name: Add Docker GPG key
       get_url:
@@ -162,6 +161,7 @@
           - flask-mysqldb
           - selinux
         state: latest
+        extra_args: --upgrade
 
     - name: git pull IFotos
   #    copy:
