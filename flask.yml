@@ -119,7 +119,9 @@
         enablerepo: epel
     - name: Upgrade all packages
       yum:
-        name: '*'
+        name: 
+          - '*'
+          - python2-pip
         state: latest
     - name: Add Docker GPG key
       get_url:
