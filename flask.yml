@@ -150,6 +150,10 @@
  #   - name: Install packages
  #     yum:  # name={{item}} state=present
  #       name:
+    - name: Upgrade pip 
+      shell: 
+        cmd: pip install --upgrade pip
+        warn: false
 
     - name: Pip setup for ansible
       pip:
@@ -161,7 +165,6 @@
           - flask-mysqldb
           - selinux
         state: latest
-        extra_args: --upgrade
 
     - name: git pull IFotos
   #    copy:
