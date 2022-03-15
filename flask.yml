@@ -118,7 +118,6 @@
         state: present
         update_cache: yes
         enablerepo: epel
-        become: true
 
     - name: Add Docker GPG key
       get_url:
