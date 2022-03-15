@@ -117,6 +117,7 @@
           - libselinux-python3
         state: latest
         update_cache: yes
+        enablerepo: epel
 
     - name: Add Docker GPG key
       get_url:
