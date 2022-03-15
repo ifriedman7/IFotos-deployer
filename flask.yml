@@ -156,7 +156,6 @@
           - docker-compose
           - flask-mysqldb
           - selinux
-        executable: /usr/local/bin/pip
 
     - name: git pull IFotos
   #    copy:
