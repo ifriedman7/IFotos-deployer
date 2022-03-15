@@ -104,7 +104,6 @@
           - device-mapper-persistent-data
           - lvm2
           - epel-release
-          - '*'
           - python
           - python-devel
           - python2-pip
@@ -118,7 +117,10 @@
         state: present
         update_cache: yes
         enablerepo: epel
-
+    - name: Upgrade all packages
+      yum:
+        name: '*'
+        state: latest
     - name: Add Docker GPG key
       get_url:
         url: https://download.docker.com/linux/centos/gpg
