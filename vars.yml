@@ -11,4 +11,4 @@ infra_tags:
 app_name: IFotos
 app_exe: IFotos/app.py
 user: maintuser
-ansible_python_interpreter: /usr/bin/python2
+ansible_python_interpreter: /usr/bin/python3
