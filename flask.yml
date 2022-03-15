@@ -103,7 +103,7 @@
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
-          - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+          - epel-release
           - '*'
           - python
           - python-devel
@@ -115,7 +115,7 @@
           - python3
           - python3-pip
           - libselinux-python3
-        state: latest
+        state: present
         update_cache: yes
         enablerepo: epel
         become: true
