@@ -103,7 +103,7 @@
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
-          - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+          - 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
           - '*'
           - python
           - python-devel
