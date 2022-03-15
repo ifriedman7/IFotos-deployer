@@ -158,6 +158,7 @@
           - docker-compose
           - flask-mysqldb
           - selinux
+        state: latest
 
     - name: git pull IFotos
   #    copy:
