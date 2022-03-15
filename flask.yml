@@ -150,9 +150,9 @@
  #   - name: Install packages
  #     yum:  # name={{item}} state=present
  #       name:
-    - name: Upgrade pip 
+    - name: Upgrade pip2 
       shell: 
-        cmd: pip install --upgrade pip
+        cmd: 'sudo pip2 install --upgrade pip'
         warn: false
 
     - name: Pip setup for ansible
