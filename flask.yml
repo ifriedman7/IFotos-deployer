@@ -165,7 +165,7 @@
           - boto3
           - docker
           - docker-compose
-          - flask-mysqldb
+  #        - flask-mysqldb set it up in python3 env
           - selinux
         state: latest
         extra_args: --disable-pip-version-check --no-cache-dir 
