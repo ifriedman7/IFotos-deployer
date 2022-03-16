@@ -163,11 +163,11 @@
       yum:
         name: 
           - mysql-devel
-          - mysql-community-server
           - mysql
           - mysql-common
           - mysql-libs
-          - libmysqlclient-devel
+          - MySQL-python
+ #         - libmysqlclient-devel
           - gcc
           - mysql-community-server
         state: present
