@@ -169,6 +169,7 @@
           - MySQL-python
  #         - libmysqlclient-devel
           - gcc
+          - gcc-devel
           - mysql-community-server
         state: present
         enablerepo: mysql57-community
