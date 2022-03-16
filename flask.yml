@@ -145,14 +145,14 @@
         state: started
         enabled: yes
 
- #   - name: Add Mysql GPG key
- #     shell:
-  #      cmd: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-   #     warn: false
-
+    - name: Add Mysql GPG key
+      shell:
+        cmd: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+        warn: false
+        
     - name: Install Mysql repo
       shell:
-        cmd: sudo rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+        cmd: sudo rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
         warn: false
     - name: Configure Mysql repo - Disable all
       shell:
