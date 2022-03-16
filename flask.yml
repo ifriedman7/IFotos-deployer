@@ -174,7 +174,9 @@
           - docker-compose
           - flask-mysqldb
         state: latest  
+        virtualenv: /home/{{ user }}/{{ app_name }}
         virtualenv_python: python3.6
+        virtualenv_site_packages: yes
     - name: git pull IFotos
   #    copy:
   #      src: python/
