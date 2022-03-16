@@ -120,6 +120,7 @@
         state: present
         update_cache: yes
         enablerepo: epel
+        skip_broken: yes
     - name: Upgrade all packages
       yum:
         name: 
