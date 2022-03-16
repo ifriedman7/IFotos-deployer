@@ -205,7 +205,7 @@
       pip:
         name:
           - Flask
-          - mysqlclient
+ #         - mysqlclient
           - pymysql
           - Flask-MySQLdb
           - docker
