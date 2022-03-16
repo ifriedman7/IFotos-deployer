@@ -150,14 +150,15 @@
  #   - name: Install packages
  #     yum:  # name={{item}} state=present
  #       name:
-    - name: Upgrade pip2 
-      shell: 
-        cmd: pip install -U pip
-        warn: false
+ #   - name: Upgrade pip2 
+ #     shell: 
+ #       cmd: pip install -U pip
+  #      warn: false
 
     - name: Pip setup for ansible
       pip:
         name: 
+          - urllib3
           - pip
           - boto3
           - docker
