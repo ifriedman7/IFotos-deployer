@@ -145,15 +145,14 @@
         state: started
         enabled: yes
 
-    - name: Add Mysql GPG key
-      get_url:
-        url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-        dest: /etc/pki/rpm-gpg/
-        mode: 0644
+ #   - name: Add Mysql GPG key
+ #     shell:
+  #      cmd: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+   #     warn: false
 
     - name: Install Mysql repo
       shell:
-        cmd: sudo rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
+        cmd: sudo rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
         warn: false
     - name: Configure Mysql repo - Disable all
       shell:
