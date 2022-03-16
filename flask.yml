@@ -152,7 +152,7 @@
         
     - name: Install Mysql repo
       shell:
-        cmd: sudo rpm -ivh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
+        cmd: sudo rpm -ivh --replacepkgs https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
         warn: false
     - name: Configure Mysql repo - Disable all
       shell:
