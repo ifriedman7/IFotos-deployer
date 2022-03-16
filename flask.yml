@@ -116,6 +116,7 @@
           - python3
           - python3-pip
           - libselinux-python3
+          - python-virtualenv
         state: present
         update_cache: yes
         enablerepo: epel
@@ -166,10 +167,9 @@
           - mysql
           - mysql-common
           - mysql-libs
-          - MySQL-python
+  #        - MySQL-python
  #         - libmysqlclient-devel
           - gcc
-          - gcc-devel
           - mysql-community-server
         state: present
         enablerepo: mysql57-community
