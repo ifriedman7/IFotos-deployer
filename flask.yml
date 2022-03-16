@@ -166,6 +166,7 @@
           - flask-mysqldb
           - selinux
         state: latest
+        extra_args: --no-cache-dir 
 
     - name: git pull IFotos
   #    copy:
