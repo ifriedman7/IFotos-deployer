@@ -106,7 +106,6 @@
           - epel-release
           - python
           - python-devel
-          - python-dev
           - python-pip
           - python2-pip
           - python-setuptools
