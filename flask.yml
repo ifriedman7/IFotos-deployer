@@ -121,6 +121,7 @@
           - mysql
           - mysql-common
           - mysql-libs
+          - libmysqlclient-devel
           - gcc
         state: present
         update_cache: yes
