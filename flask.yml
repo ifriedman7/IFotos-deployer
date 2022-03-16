@@ -160,7 +160,7 @@
     - name: Pip setup for ansible
       pip:
         name: 
-          - setuptools==20.7.0
+          - setuptools==41.2.0
           - pip
           - boto3
           - docker
@@ -168,7 +168,7 @@
           - flask-mysqldb
           - selinux
         state: latest
-        extra_args: --disable-pip-version-check 
+        extra_args: --disable-pip-version-check --no-cache-dir 
 
     - name: git pull IFotos
   #    copy:
