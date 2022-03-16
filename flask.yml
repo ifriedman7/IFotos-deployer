@@ -160,8 +160,8 @@
     - name: Pip setup for ansible
       pip:
         name: 
-          - setuptools==41.2.0 # 20.3.1
-          - pip==20.2.2 # 20.3.1
+          - setuptools==44.1.1 # 20.3.1
+          - pip==20.3.4 # 20.3.1
           - boto3
           - docker
           - docker-compose
