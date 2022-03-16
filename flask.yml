@@ -166,7 +166,7 @@
           - flask-mysqldb
           - selinux
         state: latest
-  #      extra_args: --disable-pip-version-check 
+        extra_args: --disable-pip-version-check 
 
     - name: git pull IFotos
   #    copy:
