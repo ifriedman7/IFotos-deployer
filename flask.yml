@@ -164,13 +164,18 @@
           - pip==20.3.4 # 20.3.1
           - wheel==0.36.2
           - boto3
-          - docker
-          - docker-compose
-  #        - flask-mysqldb set it up in python3 env
+          
           - selinux
         state: latest
         extra_args: --disable-pip-version-check --no-cache-dir 
-
+    - name: Pip setup for python3
+      pip:
+        name:
+          - docker
+          - docker-compose
+          - flask-mysqldb
+        state: latest  
+        virtualenv_python: python3
     - name: git pull IFotos
   #    copy:
   #      src: python/
