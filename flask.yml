@@ -116,13 +116,6 @@
           - python3
           - python3-pip
           - libselinux-python3
-          - mysql-devel
-          - mysql-community-devel
-          - mysql
-          - mysql-common
-          - mysql-libs
-          - libmysqlclient-devel
-          - gcc
         state: present
         update_cache: yes
         enablerepo: epel
@@ -168,7 +161,15 @@
         warn: false
     - name: Install mysql community server
       yum:
-        name: mysql-community-server
+        name: 
+          - mysql-devel
+          - mysql-community-server
+          - mysql
+          - mysql-common
+          - mysql-libs
+          - libmysqlclient-devel
+          - gcc
+          - mysql-community-server
         state: present
         enablerepo: mysql57-community
  #   - name: Starting and Enabling mysql service (in container)
