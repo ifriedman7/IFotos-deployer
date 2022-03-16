@@ -144,6 +144,32 @@
         name: docker
         state: started
         enabled: yes
+
+    - name: Add Mysql GPG key
+      get_url:
+        url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+        dest: /etc/pki/rpm-gpg/
+        mode: 0644
+
+    - name: Install Mysql repo
+      shell:
+        cmd: sudo rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
+        warn: false
+    - name: Configure Mysql repo - Disable all
+      shell:
+        cmd: sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
+        warn: false
+    - name: Install mysql community server
+      yum:
+        name: mysql-community-server
+        state: present
+        enablerepo: mysql57-community
+ #   - name: Starting and Enabling mysql service (in container)
+  #    service:
+   #     name: mysqld
+  #      state: started
+  #      enabled: yes
+
     - name: Install Docker-compose 
       shell: 
         cmd: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -170,6 +196,10 @@
     - name: Pip setup for python3
       pip:
         name:
+          - Flask
+          - mysqlclient
+          - pymysql
+          - Flask-MySQLdb
           - docker
           - docker-compose
           - flask-mysqldb
