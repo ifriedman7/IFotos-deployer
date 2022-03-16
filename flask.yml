@@ -104,6 +104,7 @@
           - device-mapper-persistent-data
           - lvm2
           - epel-release
+          - libcurl-devel
           - python
           - python-devel
           - python-pip
