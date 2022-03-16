@@ -152,7 +152,7 @@
  #       name:
     - name: Upgrade pip2 
       shell: 
-        cmd: 'sudo pip2 install --upgrade pip'
+        cmd: pip install -U pip
         warn: false
 
     - name: Pip setup for ansible
