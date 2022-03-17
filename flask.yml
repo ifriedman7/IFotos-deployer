@@ -107,6 +107,7 @@
           - libcurl-devel
           - python
           - python-devel
+          - python3-devel
           - python-pip
           - python2-pip
           - python-setuptools
