@@ -71,7 +71,7 @@
         volumes:
         - device_name: /dev/sda1
           ebs:
-            volume_size: 20
+            volume_size: 24
             delete_on_termination: true
         image_id: "{{ image }}"
         wait: true 
