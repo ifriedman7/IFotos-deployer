@@ -11,12 +11,20 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         name: "{{ security_group }}"
-        description: "ssh 22 security group"
+        description: "{{ security_group }}"
         region: "{{ region }}"
         rules:
           - proto: tcp
             from_port: 22
             to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 3000
+            to_port: 3000
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 9000
+            to_port: 9000
             cidr_ip: 0.0.0.0/0
         rules_egress:
           - proto: all
@@ -218,10 +226,10 @@
    #     virtualenv_python: python3.6
    #     virtualenv_site_packages: yes
         executable: /usr/bin/pip3
-  #  - name: git pull IFotos in the container
-  #    copy:
-  #      src: python/
-  #      dest: /home/{{ user }}/{{ app_name }}
+    - name: Copy IFotos folder to node
+      copy:
+        src: IFotos/
+        dest: /home/{{ user }}/{{ app_name }}
   #    git:
   #      repo: https://github.com/ifriedman7/IFotos.git
 
