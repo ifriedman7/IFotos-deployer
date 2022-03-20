@@ -66,10 +66,10 @@ RUN yum -y install \
            python-docker-py \
            docker-selinux \
            libselinux-python3
-           kubernetes-client \
-           kubernetes-node \
-           kubernetes-devel \
-           kubernetes-master \
+  #         kubernetes-client \
+  #         kubernetes-node \
+  #         kubernetes-devel \
+  #         kubernetes-master \
            gdb-gdbserver \
            vim-minimal \
            bash-completion \
