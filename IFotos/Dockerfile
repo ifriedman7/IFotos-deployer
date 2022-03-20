@@ -88,7 +88,8 @@ RUN rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
 RUN sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
 RUN yum --enablerepo=mysql57-community install mysql-community-server
 RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-RUN git pull https://github.com/ifriedman7/IFotos.git
+
+RUN git clone https://github.com/ifriedman7/IFotos.git
 
 # Set default command
 #CMD ["/usr/bin/bash"]
