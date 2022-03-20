@@ -70,7 +70,7 @@ RUN yum -y install \
   #         kubernetes-node \
   #         kubernetes-devel \
   #         kubernetes-master \
-           gdb-gdbserver \
+  #         gdb-gdbserver \
            vim-minimal \
            bash-completion \
            subscription-manager \
@@ -81,8 +81,6 @@ RUN yum -y install \
            httpd \
            && yum clean all
 
-WORKDIR /IFotos
-RUN pip install -r requirements.txt
 #mysql server stuff
 RUN rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
 RUN sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
@@ -90,6 +88,9 @@ RUN yum --enablerepo=mysql57-community install mysql-community-server
 RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
+WORKDIR /IFotos
+RUN pip install -r requirements.txt
+
 
 # Set default command
 #CMD ["/usr/bin/bash"]
