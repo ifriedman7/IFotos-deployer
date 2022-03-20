@@ -68,6 +68,11 @@
         - "{{ sg.group_id }}"
         - "{{ elb.elb.security_group_ids | first }}"
         instance_type: "{{ instance_type }}"
+        volumes:
+        - device_name: /dev/mapper/VolGroup00-rootVol
+          ebs:
+            volume_size: 10
+            delete_on_termination: true
         image_id: "{{ image }}"
         wait: true 
         region: "{{ region }}"
