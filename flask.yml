@@ -218,12 +218,12 @@
    #     virtualenv_python: python3.6
    #     virtualenv_site_packages: yes
         executable: /usr/bin/pip3
-    - name: git pull IFotos
+  #  - name: git pull IFotos in the container
   #    copy:
   #      src: python/
   #      dest: /home/{{ user }}/{{ app_name }}
-      git:
-        repo: https://github.com/ifriedman7/IFotos.git
+  #    git:
+  #      repo: https://github.com/ifriedman7/IFotos.git
 
     - name: Run the container
       docker_compose:

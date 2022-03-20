@@ -3,10 +3,4 @@ mysqlclient
 pymysql
 Flask-MySQLdb
 flask-mysql
-botocore
-boto3
-docker
-docker-compose
-ansible
-awscli
 selinux
