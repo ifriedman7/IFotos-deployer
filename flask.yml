@@ -128,6 +128,10 @@
   #      number: 2
   #      resize: yes
   #      state: present
+    - name: pvresize
+      shell:
+        cmd: pvresize /dev/xvda2
+      become: yes
     - name: Resize VG VolGroup00
       shell:
         cmd: vgextend VolGroup00 /dev/xvda2
