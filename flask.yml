@@ -130,7 +130,7 @@
   #    become: yes
   #    become_user: root
     - name: resize partition
-      parted:
+      community.general.parted:
         device: /dev/xvda
         number: 2
         resize: yes
