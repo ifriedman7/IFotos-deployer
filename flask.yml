@@ -121,7 +121,7 @@
 
     - name: Extend partition to fill all available space
       shell:
-        cmd: echo -e "resizepart\n2\nYes\n100%\n"| parted /dev/xvda ---pretend-input-tty
+        cmd: echo -e "resizepart 2 100%\nquit\n"| parted /dev/xvda ---pretend-input-tty
       become: yes
   #    parted:
   #      device: /dev/xvda
@@ -133,7 +133,20 @@
         vg: VolGroup00
         pvs: /dev/sda2
   #      pvresize: yes
-
+    - name: Increase Volume varVol
+      lvol:
+        vg: VolGroup00
+        lv: varVol
+        size: 14g
+        resizefs: yes
+        force: yes
+    - name: Increase Volume rootVol
+      lvol:
+        vg: VolGroup00
+        lv: rootVol
+        size: 6g
+        resizefs: yes
+        force: yes
     - name: "Download EPEL RPM"
       get_url:
         url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
