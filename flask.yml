@@ -100,22 +100,23 @@
   vars_files:
     - vars.yml
   tasks:
-    - name: umount fs
-      shell:
-        cmd: umount -l /dev/mapper/VolGroup00-auditVol
-      become: yes
-      become_user: root
-    - name: Resize2fs
-      shell:
-        cmd: resize2fs /dev/mapper/VolGroup00-auditVol 512M
-      become: yes
-      become_user: root
+ #   - name: umount fs
+ #     shell:
+ #       cmd: umount -l /dev/mapper/VolGroup00-auditVol
+ #     become: yes
+ #     become_user: root
+ #   - name: Resize2fs
+ #     shell:
+ #       cmd: resize2fs /dev/mapper/VolGroup00-auditVol 512M
+ #     become: yes
+ #     become_user: root
     - name: Shrink Volume auditVol
       lvol:
         vg: VolGroup00
         lv: auditVol
         size: 512
         shrink: yes
+        resizefs: yes
         force: yes
     - name: mount auditVol
       shell:
