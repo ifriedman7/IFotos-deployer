@@ -96,7 +96,7 @@ RUN yum -y --enablerepo=mysql57-community install mysql-community-server
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR /IFotos
-RUN pip install -r requirements.txt
+RUN /usr/bin/pip3 install -r requirements.txt
 
 
 # Set default command
