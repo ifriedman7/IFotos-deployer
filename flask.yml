@@ -130,7 +130,7 @@
   #      state: present
     - name: Resize VG VolGroup00
       shell:
-        cmd: vgextend VolGroup00 /dev/sda2
+        cmd: vgextend VolGroup00 /dev/xvda2
       become: yes
   #    lvg:
   #      vg: VolGroup00
