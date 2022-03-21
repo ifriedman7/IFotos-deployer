@@ -129,7 +129,14 @@
       lvol:
         vg: VolGroup00
         lv: rootVol
-        size: 6g
+        size: 7g
+        resizefs: yes
+        force: yes
+    - name: Increase Volume homeVol
+      lvol:
+        vg: VolGroup00
+        lv: homeVol
+        size: 3g
         resizefs: yes
         force: yes
 
