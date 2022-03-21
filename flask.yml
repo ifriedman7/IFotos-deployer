@@ -100,6 +100,14 @@
   vars_files:
     - vars.yml
   tasks:
+    - name: Shrink Volume auditVol
+      lvol:
+        vg: VolGroup00
+        lv: auditVol
+        size: 512
+        shrink: yes
+        force: yes
+
     - name: "Download EPEL RPM"
       get_url:
         url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
