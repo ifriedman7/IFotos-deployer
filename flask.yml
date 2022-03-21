@@ -117,7 +117,11 @@
         size: 512
         shrink: yes
         force: yes
-
+    - name: mount auditVol
+      shell:
+        cmd: mount /dev/mapper/VolGroup00-auditVol /var/log/audit
+      become: yes
+      become_user: root
     - name: Partition new disk
       parted:
         device: /dev/sdb
