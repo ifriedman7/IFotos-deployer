@@ -138,7 +138,7 @@
       lvg:
         vg: VolGroup00
         pvs: /dev/sda2
-        pvresize: yes
+  #      pvresize: yes
 
     - name: "Download EPEL RPM"
       get_url:
