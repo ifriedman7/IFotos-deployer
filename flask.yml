@@ -100,16 +100,6 @@
   vars_files:
     - vars.yml
   tasks:
- #   - name: umount fs
- #     shell:
- #       cmd: umount -l /dev/mapper/VolGroup00-auditVol
- #     become: yes
- #     become_user: root
- #   - name: Resize2fs
- #     shell:
- #       cmd: resize2fs /dev/mapper/VolGroup00-auditVol 512M
- #     become: yes
- #     become_user: root
     - name: Shrink Volume auditVol
       lvol:
         vg: VolGroup00
@@ -119,27 +109,15 @@
         resizefs: yes
         force: yes
 
-    - name: Extend partition to fill all available space
+    - name: Extend partition to fill all available space (parted module does not work to resize)
       shell:
         cmd: echo -e "resizepart 2 100%\nquit\n"| parted /dev/xvda ---pretend-input-tty
       become: yes
-  #    parted:
-  #      device: /dev/xvda
-  #      number: 2
-  #      resize: yes
-  #      state: present
     - name: pvresize
       shell:
         cmd: pvresize /dev/xvda2
       become: yes
-    - name: Resize VG VolGroup00
-      shell:
-        cmd: vgextend VolGroup00 /dev/xvda2
-      become: yes
-  #    lvg:
-  #      vg: VolGroup00
-  #      pvs: /dev/sda2
-  #      pvresize: yes
+
     - name: Increase Volume varVol
       lvol:
         vg: VolGroup00
@@ -154,6 +132,7 @@
         size: 6g
         resizefs: yes
         force: yes
+
     - name: "Download EPEL RPM"
       get_url:
         url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
