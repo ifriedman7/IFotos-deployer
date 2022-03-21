@@ -120,7 +120,8 @@
         force: yes
 
     - name: Extend partition to fill all available space
-      command: "/sbin/parted ---pretend-input-tty /dev/xvda resizepart 2 yes 100%"
+      shell:
+      cmd: echo -e "resizepart\n2\nYes\n100%\n"| parted /dev/xvda ---pretend-input-tty
       become: yes
   #    parted:
   #      device: /dev/xvda
