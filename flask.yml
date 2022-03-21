@@ -118,17 +118,6 @@
         shrink: yes
         resizefs: yes
         force: yes
- #   - name: mount auditVol
- #     shell:
- #       cmd: mount /dev/mapper/VolGroup00-auditVol /var/log/audit
- #     become: yes
- #     become_user: root
- #   - name: Partition new disk
- #     shell: echo -e "n\np\n1\n\n\nw" | fdisk /dev/sdb
- #     args:
- #       executable: /bin/bash
-  #    become: yes
-  #    become_user: root
     - name: resize partition
       community.general.parted:
         device: /dev/xvda
