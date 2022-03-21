@@ -279,7 +279,7 @@
 
     - name: Run the container
       shell:
-        cmd: cd IFotos && docker build -t ifotos . && docker run ifotos
+        cmd: cd IFotos && docker build -t ifotos . && docker run -rm -d ifotos
         warn: false
   #    docker_compose:
   #      project_src: /home/{{ user }}/{{ app_exe }}
