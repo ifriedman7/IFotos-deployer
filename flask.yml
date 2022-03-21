@@ -129,9 +129,12 @@
   #      resize: yes
   #      state: present
     - name: Resize VG VolGroup00
-      lvg:
-        vg: VolGroup00
-        pvs: /dev/sda2
+      shell:
+        cmd: vgextend VolGroup00 /dev/sda2
+      become: yes
+  #    lvg:
+  #      vg: VolGroup00
+  #      pvs: /dev/sda2
   #      pvresize: yes
     - name: Increase Volume varVol
       lvol:
