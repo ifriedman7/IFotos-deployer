@@ -107,6 +107,20 @@
         size: 512
         shrink: yes
         force: yes
+    - name: Resize2fs
+      shell:
+        cmd: sudo resize2fs /dev/mapper/VolGroup00-auditVol 512M
+    - name: Partition new disk
+      parted:
+        device: /dev/sdb
+        number: 1
+        flags: [ lvm ]
+        state: present
+    - name: Resize VG VolGroup00
+      lvg:
+        vg: VolGroup00
+        pvs: /dev/sda2, /dev/sdb
+        pvresize: yes
 
     - name: "Download EPEL RPM"
       get_url:
