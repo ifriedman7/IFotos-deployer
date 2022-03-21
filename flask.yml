@@ -102,7 +102,7 @@
   tasks:
     - name: umount fs
       shell:
-        cmd: umount -f /dev/mapper/VolGroup00-auditVol
+        cmd: umount -l /dev/mapper/VolGroup00-auditVol
       become: yes
       become_user: root
     - name: Resize2fs
