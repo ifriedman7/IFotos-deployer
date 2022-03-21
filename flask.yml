@@ -129,11 +129,12 @@
  #       executable: /bin/bash
   #    become: yes
   #    become_user: root
-  #  parted:
-  #      device: /dev/sdb
-  #      number: 1
-  #      flags: [ lvm ]
-  #      state: present
+    - name: resize partition
+      parted:
+        device: /dev/xvda
+        number: 2
+        resize: yes
+        state: present
     - name: Resize VG VolGroup00
       lvg:
         vg: VolGroup00
