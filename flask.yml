@@ -121,7 +121,7 @@
 
     - name: Extend partition to fill all available space
       shell:
-      cmd: echo -e "resizepart\n2\nYes\n100%\n"| parted /dev/xvda ---pretend-input-tty
+        cmd: echo -e "resizepart\n2\nYes\n100%\n"| parted /dev/xvda ---pretend-input-tty
       become: yes
   #    parted:
   #      device: /dev/xvda
