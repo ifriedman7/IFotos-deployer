@@ -123,12 +123,12 @@
  #       cmd: mount /dev/mapper/VolGroup00-auditVol /var/log/audit
  #     become: yes
  #     become_user: root
-    - name: Partition new disk
-      shell: echo -e "n\np\n1\n\n\nw" | fdisk /dev/sdb
-      args:
-        executable: /bin/bash
-      become: yes
-      become_user: root
+ #   - name: Partition new disk
+ #     shell: echo -e "n\np\n1\n\n\nw" | fdisk /dev/sdb
+ #     args:
+ #       executable: /bin/bash
+  #    become: yes
+  #    become_user: root
   #  parted:
   #      device: /dev/sdb
   #      number: 1
@@ -137,7 +137,7 @@
     - name: Resize VG VolGroup00
       lvg:
         vg: VolGroup00
-        pvs: /dev/sda2, /dev/sdb
+        pvs: /dev/sda2
         pvresize: yes
 
     - name: "Download EPEL RPM"
