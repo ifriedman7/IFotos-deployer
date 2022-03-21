@@ -118,12 +118,15 @@
         shrink: yes
         resizefs: yes
         force: yes
-    - name: resize partition
-      community.general.parted:
-        device: /dev/xvda
-        number: 2
-        resize: yes
-        state: present
+
+    - name: Extend partition to fill all available space
+      command: "/sbin/parted ---pretend-input-tty /dev/xvda resizepart 2 yes 100%"
+      become: yes
+  #    parted:
+  #      device: /dev/xvda
+  #      number: 2
+  #      resize: yes
+  #      state: present
     - name: Resize VG VolGroup00
       lvg:
         vg: VolGroup00
