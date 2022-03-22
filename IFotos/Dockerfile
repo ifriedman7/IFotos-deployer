@@ -111,4 +111,4 @@ RUN /usr/bin/pip3 install -r requirements.txt
 #CMD ["/usr/bin/bash"]
 EXPOSE 3000
 ENTRYPOINT [ "IFotos" ]
-CMD [ "app.py" ]
+CMD [ "nohup python3 app.py &" ]
