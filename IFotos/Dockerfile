@@ -97,7 +97,7 @@ RUN yum -y --enablerepo=mysql57-community install \
            mysql \
            mysql-common \
            mysql-libs \
-           mysql-community-devel \
+           mysql-community-devel
 
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
