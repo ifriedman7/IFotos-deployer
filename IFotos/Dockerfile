@@ -88,9 +88,9 @@ RUN yum -y install \
            && yum clean all
 
 #mysql server stuff
+RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 RUN rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
 RUN sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
-RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 RUN yum -y --enablerepo=mysql57-community install \ 
            mysql-community-server \
            mysql-devel \
