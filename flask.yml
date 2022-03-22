@@ -272,7 +272,7 @@
         executable: /usr/bin/pip3
     - name: Copy IFotos folder to node
       copy:
-        src: ~/IFotos/IFotos/
+        src: IFotos/
         dest: /home/{{ user }}/{{ app_name }}
   #    git:
   #      repo: https://github.com/ifriedman7/IFotos.git

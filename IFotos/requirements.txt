@@ -1,6 +1,0 @@
-Flask
-mysqlclient
-pymysql
-Flask-MySQLdb
-flask-mysql
-selinux
