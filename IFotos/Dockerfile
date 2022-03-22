@@ -66,11 +66,13 @@ RUN yum -y install \
            python-docker-py \
            docker-selinux \
            python-pip \
+           python-devel \
            python2-pip \
            python-setuptools \
            python3 \
            python3-pip \
            python-virtualenv \
+           python3-devel \
            libselinux-python3 \
            kubernetes-client \
            kubernetes-node \
