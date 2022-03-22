@@ -71,6 +71,7 @@ RUN yum -y install \
            python3 \
            python3-pip \
            python-virtualenv \
+           mysql-community-devel \
            libselinux-python3 \
            kubernetes-client \
            kubernetes-node \
