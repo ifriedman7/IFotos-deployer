@@ -101,7 +101,7 @@ RUN yum -y --enablerepo=mysql57-community install \
 
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
-WORKDIR /IFotos
+WORKDIR IFotos
 RUN /usr/bin/pip3 install -r requirements.txt
 
 
