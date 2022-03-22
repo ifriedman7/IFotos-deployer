@@ -110,5 +110,5 @@ RUN /usr/bin/pip3 install -r requirements.txt
 # Set default command
 #CMD ["/usr/bin/bash"]
 EXPOSE 3000
-ENTRYPOINT [ "IFotos" ]
+ENTRYPOINT [ "/IFotos" ]
 CMD [ "nohup python3 app.py &" ]
