@@ -306,7 +306,6 @@
   gather_facts: False
   vars_files:
     - vars.yml  
-    - aws_keys.yml
   tasks:
     - name: Attach EC2 instance to ELB
       ec2_elb:
