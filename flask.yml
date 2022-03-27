@@ -109,16 +109,16 @@
         timeout: 120
       loop: "{{ ec2.instances }}"
 
-    - name: elb target
-      elb_target:
-        aws_access_key: "{{ aws_access_key }}"
-        aws_secret_key: "{{ aws_secret_key }}"
-        state: present
-        target_group_name: "{{ elb_target_group }}"
-        region: "{{ region }}"
-        target_id: "{{ item.instance_id }}"
-        target_port: 3000
-      loop: "{{ ec2.instances }}"
+ #   - name: elb target
+ #     elb_target:
+ #       aws_access_key: "{{ aws_access_key }}"
+ #       aws_secret_key: "{{ aws_secret_key }}"
+ #       state: present
+ #       target_group_name: "{{ elb_target_group }}"
+ #       region: "{{ region }}"
+ #       target_id: "{{ item.instance_id }}"
+ #       target_port: 3000
+ #     loop: "{{ ec2.instances }}"
 
     - name: Instance Register
       elb_instance:
