@@ -5,7 +5,7 @@ load_balancer: ike-lb
 image: ami-005f0a3901058a235 # spel-minimal-centos-7-hvm-2021.08.1.x86_64-gp2 #ami-c1cf79bc # not Ubuntu 16.04
 keypair: Ike-key1 # EC2 AWS key pair name
 region: us-east-1
-vpc_id: vpc-00eae63004c72bd15
+vpc_id: 'vpc-00eae63004c72bd15'
 elb_target_group: ike-lb-tg
 infra_tags:
   app: IFotos
