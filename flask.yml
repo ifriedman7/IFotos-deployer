@@ -113,31 +113,31 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         state: present
-        target_group_name: "{{ load_balancer }}"
+        target_group_name: "{{ elb_target_group }}"
         region: "{{ region }}"
         target_id: "{{ item.instance_id }}"
         target_port: 3000
       loop: "{{ ec2.instances }}"
 
- #   - name: Instance Register
- #     elb_instance:
- #       aws_access_key: "{{ aws_access_key }}"
- #       aws_secret_key: "{{ aws_secret_key }}"
- #       instance_id: "{{ item.instance_id }}"
- #       ec2_elbs: "{{ load_balancer }}"
- #       region: "{{ region }}"
- #       state: present
- #     loop: "{{ ec2.instances }}"
-
-    - name: Attach EC2 instance to ELB
-      ec2_elb:
+    - name: Instance Register
+      elb_instance:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        state: present
+        instance_id: "{{ item.instance_id }}"
         ec2_elbs: "{{ load_balancer }}"
         region: "{{ region }}"
-        instance_id: "{{ item.instance_id }}"
+        state: present
       loop: "{{ ec2.instances }}"
+
+ #   - name: Attach EC2 instance to ELB
+ #     ec2_elb:
+ #       aws_access_key: "{{ aws_access_key }}"
+ #       aws_secret_key: "{{ aws_secret_key }}"
+ #       state: present
+ #       ec2_elbs: "{{ load_balancer }}"
+ #       region: "{{ region }}"
+ #       instance_id: "{{ item.instance_id }}"
+ #     loop: "{{ ec2.instances }}"
 
 - hosts: remote
   remote_user: maintuser
