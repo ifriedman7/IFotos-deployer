@@ -6,6 +6,7 @@ image: ami-005f0a3901058a235 # spel-minimal-centos-7-hvm-2021.08.1.x86_64-gp2 #a
 keypair: Ike-key1 # EC2 AWS key pair name
 region: us-east-1
 vpc_id: vpc-00eae63004c72bd15 # change
+elb_target_group: ike_lb_tg
 infra_tags:
   app: IFotos
   type: web

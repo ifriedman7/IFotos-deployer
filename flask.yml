@@ -63,7 +63,7 @@
       elb_target_group:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        name: "{{ load_balancer }}"
+        name: "{{ elb_target_group }}"
         port: 80
         state: present
         region: "{{ region }}"
