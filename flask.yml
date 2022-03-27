@@ -114,15 +114,16 @@
         target_id: "{{ item.instance_id }}"
         target_port: 3000
       loop: "{{ ec2.instances }}"
-    - name: Instance Register
-      elb_instance:
-        aws_access_key: "{{ aws_access_key }}"
-        aws_secret_key: "{{ aws_secret_key }}"
-        instance_id: "{{ item.instance_id }}"
-        ec2_elbs: "{{ load_balancer }}"
-        region: "{{ region }}"
-        state: present
-      loop: "{{ ec2.instances }}"
+
+ #   - name: Instance Register
+ #     elb_instance:
+ #       aws_access_key: "{{ aws_access_key }}"
+ #       aws_secret_key: "{{ aws_secret_key }}"
+ #       instance_id: "{{ item.instance_id }}"
+ #       ec2_elbs: "{{ load_balancer }}"
+ #       region: "{{ region }}"
+ #       state: present
+ #     loop: "{{ ec2.instances }}"
 
     - name: Attach EC2 instance to ELB
       ec2_elb:
