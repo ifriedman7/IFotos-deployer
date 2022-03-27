@@ -104,8 +104,8 @@
         state: present
         region: "{{ region }}"
         listeners:
-          - protocol: http
-            port: 80
+          - Protocol: http
+            Port: 80
  #           instance_port: 3000
             DefaultActions:
               - Type: forward # Required. Only 'forward' is accepted at this time
