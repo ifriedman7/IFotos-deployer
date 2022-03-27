@@ -64,13 +64,14 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         name: "{{ elb_target_group }}"
+        protocol: http
         port: 80
         state: present
         region: "{{ region }}"
         vpc_id: "{{ vpc_id }}"
-        protocol: http
         tags: "{{ infra_tags }}"
       register: elb_target_group
+
     - name: Launch new EC2 instances Upgrade to "ec2_instance" module
       ec2_instance:
         aws_access_key: "{{ aws_access_key }}"
@@ -102,6 +103,7 @@
         name: "{{ item.public_ip_address }}"
         groups: remote
       loop: "{{ ec2.instances }}"
+
     - name: Wait for SSH to come up
       wait_for_connection:
         delay: 60
