@@ -60,16 +60,15 @@
       register: elb
 
     - name: Create the ELB target group
-      community.aws.elb_target_group:
+      elb_target_group:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         name: "{{ elb_target_group }}"
         protocol: http
         port: 80
-        state: present
         region: "{{ region }}"
         vpc_id: "{{ vpc_id }}"
-        tags: "{{ infra_tags }}"
+        state: present
       register: elb_target_group
 
     - name: Launch new EC2 instances Upgrade to "ec2_instance" module
