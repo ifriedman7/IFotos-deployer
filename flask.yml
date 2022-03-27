@@ -91,6 +91,15 @@
         delay: 60
         timeout: 120
       loop: "{{ ec2.instances }}"
+    - name: Attach EC2 instance to ELB
+      ec2_elb:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        state: present
+        ec2_elbs: "{{ load_balancer }}"
+        region: "{{ region }}"
+        instance_id: "{{ item.id }}"
+      loop: "{{ ec2.instances }}"
 
 - hosts: remote
   remote_user: maintuser
@@ -307,16 +316,6 @@
   vars_files:
     - vars.yml  
   tasks:
-    - name: Attach EC2 instance to ELB
-      ec2_elb:
-        aws_access_key: "{{ aws_access_key }}"
-        aws_secret_key: "{{ aws_secret_key }}"
-        state: present
-        ec2_elbs: "{{ load_balancer }}"
-        region: "{{ region }}"
-        instance_id: "{{ item.id }}"
-      loop: "{{ ec2.instances }}"
-
     - name: Check that application is reachable through ELB
       uri:
         url: "http://{{ elb.elb.dns_name }}:3000"
