@@ -57,7 +57,6 @@ RUN yum -y install \
            systemtap-client \
            tar \
            tcpdump \
-           vim-enhanced \
            xauth \
            which \
            ostree \
@@ -80,8 +79,6 @@ RUN yum -y install \
            kubernetes-master \
            gdb-gdbserver \
            vim-minimal \
-           bash-completion \
-           subscription-manager \
            python-rhsm \
            rootfiles \
            yum-utils \

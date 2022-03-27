@@ -286,9 +286,14 @@
   #    git:
   #      repo: https://github.com/ifriedman7/IFotos.git
 
-    - name: Run the container
+  - name: Run the ifotosdb container
       shell:
-        cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos -d ifotos
+        cmd: cd && cd IFotos-db && docker build --no-cache -t ifotosdb . && docker run -p 3306:3306 --name ifotosdb -d ifotosdb
+        warn: false
+
+  - name: Run the ifotos container
+      shell:
+        cmd: cd && cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos -d ifotos
         warn: false
 
   #    docker_compose:
