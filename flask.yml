@@ -91,6 +91,14 @@
         delay: 60
         timeout: 120
       loop: "{{ ec2.instances }}"
+
+    - name: Instance Register
+      elb_instance:
+        instance_id: "{{ item.instance_id }}"
+        ec2_elbs: "{{ load_balancer }}"
+        state: present
+      loop: "{{ ec2.instances }}"
+
     - name: Attach EC2 instance to ELB
       ec2_elb:
         aws_access_key: "{{ aws_access_key }}"
@@ -98,7 +106,7 @@
         state: present
         ec2_elbs: "{{ load_balancer }}"
         region: "{{ region }}"
-        instance_id: "{{ item.id }}"
+        instance_id: "{{ item.instance_id }}"
       loop: "{{ ec2.instances }}"
 
 - hosts: remote
