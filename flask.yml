@@ -55,10 +55,10 @@
         network:
           groups: 
           - "{{ sg.group_id }}"
-          - "{{ elb.elb.security_group_ids | first }}"
+  #        - "{{ elb.elb.security_group_ids | first }}"
         security_groups:
         - "{{ sg.group_id }}"
-        - "{{ elb.elb.security_group_ids | first }}"
+  #      - "{{ elb.elb.security_group_ids | first }}"
         instance_type: "{{ instance_type }}"
         volumes:
         - device_name: /dev/sda1
