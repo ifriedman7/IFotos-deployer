@@ -63,6 +63,7 @@
         port: 80
         state: present
         region: "{{ region }}"
+        vpc_id: "{{ vpc_id }}"
         protocol: http
         tags: "{{ infra_tags }}"
       register: elb
