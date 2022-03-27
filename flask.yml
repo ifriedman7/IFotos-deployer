@@ -35,41 +35,17 @@
             cidr_ip: 0.0.0.0/0
       register: sg
 
-    - name: Create the ELB listening on port 80 to 3000
-      elb_classic_lb:
-        aws_access_key: "{{ aws_access_key }}"
-        aws_secret_key: "{{ aws_secret_key }}"
-        name: "{{ load_balancer }}"
-        state: present
-        region: "{{ region }}"
-        zones:
-          - "{{ region }}a"
-        listeners:
-          - protocol: http
-            load_balancer_port: 80
-            instance_port: 3000
-        health_check:
-          ping_protocol: http
-          ping_port: 80
-          ping_path: "/"
-          response_timeout: 5
-          interval: 10
-          unhealthy_threshold: 10
-          healthy_threshold: 2
-        tags: "{{ infra_tags }}"
-      register: elb
-
     - name: Create the ELB target group
       elb_target_group:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        name: "{{ elb_target_group }}"
+        name: "{{ target_group }}"
         protocol: http
         port: 80
         region: "{{ region }}"
         vpc_id: "{{ vpc_id }}"
         state: present
-      register: elb_target_group
+      register: tg
 
     - name: Launch new EC2 instances Upgrade to "ec2_instance" module
       ec2_instance:
@@ -109,26 +85,51 @@
         timeout: 120
       loop: "{{ ec2.instances }}"
 
- #   - name: elb target
- #     elb_target:
- #       aws_access_key: "{{ aws_access_key }}"
- #       aws_secret_key: "{{ aws_secret_key }}"
- #       state: present
- #       target_group_name: "{{ elb_target_group }}"
- #       region: "{{ region }}"
- #       target_id: "{{ item.instance_id }}"
- #       target_port: 3000
- #     loop: "{{ ec2.instances }}"
-
-    - name: Instance Register
-      elb_instance:
+    - name: elb target
+      elb_target:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        instance_id: "{{ item.instance_id }}"
-        ec2_elbs: "{{ load_balancer }}"
-        region: "{{ region }}"
         state: present
+        target_group_name: "{{ target_group }}"
+        region: "{{ region }}"
+        target_id: "{{ item.instance_id }}"
+        target_port: 3000
       loop: "{{ ec2.instances }}"
+
+    - name: Create the ELB listening on port 80 to 3000 was elb_classic_lb
+      elb_application_lb:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        name: "{{ load_balancer }}"
+        state: present
+        region: "{{ region }}"
+        listeners:
+          - protocol: http
+            port: 80
+ #           instance_port: 3000
+            DefaultActions:
+              - Type: forward # Required. Only 'forward' is accepted at this time
+                TargetGroupArn: "{{ tg.target_group_arn }}" # Required. The ARN of the target group
+  #      health_check:
+  #        ping_protocol: http
+  #        ping_port: 80
+  #        ping_path: "/"
+  #        response_timeout: 5
+  #        interval: 10
+  #        unhealthy_threshold: 10
+  #        healthy_threshold: 2
+  #      tags: "{{ infra_tags }}"
+      register: elb
+
+ #   - name: Instance Register
+ #     elb_instance:
+ #       aws_access_key: "{{ aws_access_key }}"
+ #       aws_secret_key: "{{ aws_secret_key }}"
+ #       instance_id: "{{ item.instance_id }}"
+ #       ec2_elbs: "{{ load_balancer }}"
+ #       region: "{{ region }}"
+ #       state: present
+ #     loop: "{{ ec2.instances }}"
 
  #   - name: Attach EC2 instance to ELB
  #     ec2_elb:
