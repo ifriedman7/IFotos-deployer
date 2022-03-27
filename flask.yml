@@ -110,6 +110,11 @@
             DefaultActions:
               - Type: forward # Required. Only 'forward' is accepted at this time
                 TargetGroupArn: "{{ tg.target_group_arn }}" # Required. The ARN of the target group
+        security_groups:
+        - "{{ sg.group_id }}"
+        subnets:
+        - "{{ subnet_a }}"
+        - "{{ subnet_b }}"
   #      health_check:
   #        ping_protocol: http
   #        ping_port: 80

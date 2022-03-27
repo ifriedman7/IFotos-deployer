@@ -7,6 +7,8 @@ keypair: Ike-key1 # EC2 AWS key pair name
 region: us-east-1
 vpc_id: vpc-00eae63004c72bd15 # change
 target_group: ike-lb-tg
+subnet_a: subnet-06490cb3b09755bef # change
+subnet_b: subnet-0cead2e190bca6572 # change
 infra_tags:
   app: IFotos
   type: web
