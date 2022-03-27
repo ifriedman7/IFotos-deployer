@@ -104,7 +104,7 @@
         state: present
         region: "{{ region }}"
         listeners:
-          - Protocol: http
+          - Protocol: HTTP
             Port: 80
  #           instance_port: 3000
             DefaultActions:
