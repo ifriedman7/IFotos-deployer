@@ -55,6 +55,17 @@
         tags: "{{ infra_tags }}"
       register: elb
 
+    - name: Create the ELB target group
+      elb_target_group:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        name: "{{ load_balancer }}"
+        port: 80
+        state: present
+        region: "{{ region }}"
+        protocol: http
+        tags: "{{ infra_tags }}"
+      register: elb
     - name: Launch new EC2 instances Upgrade to "ec2_instance" module
       ec2_instance:
         aws_access_key: "{{ aws_access_key }}"
@@ -97,7 +108,7 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         state: present
-        target_group_name: "{{ app_name }}"
+        target_group_name: "{{ load_balancer }}"
         region: "{{ region }}"
         target_id: "{{ item.instance_id }}"
         target_port: 3000
