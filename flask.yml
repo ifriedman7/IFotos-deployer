@@ -31,7 +31,7 @@
             cidr_ip: 0.0.0.0/0
       register: sg
 
-    - name: Create the ELB listening on port 3000
+    - name: Create the ELB listening on port 80 to 3000
       elb_classic_lb:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
@@ -42,11 +42,11 @@
           - "{{ region }}a"
         listeners:
           - protocol: http
-            load_balancer_port: 3000
+            load_balancer_port: 80
             instance_port: 3000
         health_check:
           ping_protocol: http
-          ping_port: 3000
+          ping_port: 80
           ping_path: "/"
           response_timeout: 5
           interval: 10
