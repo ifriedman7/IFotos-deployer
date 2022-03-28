@@ -340,6 +340,7 @@
       copy:
         src: /home/ec2-user/Ike/s3fs-key
         dest: /home/{{ user }}/IFotos-db/
+      become: yes
 
     - name: Run the ifotos container
       shell:
