@@ -99,9 +99,9 @@ RUN yum -y --enablerepo=mysql57-community install \
            mysql-libs \
            mysql-community-devel
 
-COPY my.cnf /etc/
-COPY fuse.conf /etc/
-COPY /home/ec2-user/Ike/s3fs-key .
+COPY /home/ec2-user/IFotos-deployer/IFotos-db/my.cnf /etc/
+COPY /home/ec2-user/IFotos-deployer/IFotos-db/fuse.conf /etc/
+COPY /home/ec2-user/Ike/s3fs-key ./
 RUN mkdir /mnt/my-bucket
 RUN s3fs ike-bucket-small /mnt/my-bucket -o passwd_file=s3fs-key -o use_cache=/tmp/bucket-cache -o allow_other
 RUN git clone https://github.com/ifriedman7/IFotos.git
@@ -111,4 +111,4 @@ WORKDIR IFotos
 # Set default command
 #CMD ["/usr/bin/bash"]
 EXPOSE 3306
-RUN systemctl start mysqld
+RUN systemctl restart mysqld
