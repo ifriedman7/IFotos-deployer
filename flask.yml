@@ -338,7 +338,7 @@
 
     - name: chmod command
       command:
-        cmd: chmod 644 /home/ec2-user/Ike/s3fs-key
+        cmd: sudo chmod 644 /home/ec2-user/Ike/s3fs-key
         warn: false
       become: yes
     - name: Copy s3fs key file to node - change
@@ -349,7 +349,7 @@
       become_user: root
     - name: chmod command 2
       command:
-        cmd: chmod 600 /home/ec2-user/Ike/s3fs-key
+        cmd: sudo chmod 600 /home/ec2-user/Ike/s3fs-key
         warn: false
       become: yes
 
