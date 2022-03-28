@@ -336,11 +336,10 @@
         src: IFotos-db/
         dest: /home/{{ user }}/IFotos-db
 
-    - name: file module 1
-      file:
-        path: /home/ec2-user/Ike/s3fs-key
-        mode: '644'
-        state: file
+    - name: chmod command
+      command:
+        cmd: chmod 644 /home/ec2-user/Ike/s3fs-key
+        warn: false
       become: yes
     - name: Copy s3fs key file to node - change
       copy:
@@ -348,11 +347,10 @@
         dest: /home/{{ user }}/IFotos-db/
       become: yes
       become_user: root
-    - name: file module 2
-      file:
-        path: /home/ec2-user/Ike/s3fs-key
-        mode: '600'
-        state: file
+    - name: chmod command 2
+      command:
+        cmd: chmod 600 /home/ec2-user/Ike/s3fs-key
+        warn: false
       become: yes
 
     - name: Run the ifotos container
