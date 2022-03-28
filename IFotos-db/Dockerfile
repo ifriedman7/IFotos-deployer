@@ -99,13 +99,13 @@ RUN yum -y --enablerepo=mysql57-community install \
            mysql-libs \
            mysql-community-devel
 
-COPY /home/ec2-user/IFotos-deployer/IFotos-db/my.cnf /etc/
-COPY /home/ec2-user/IFotos-deployer/IFotos-db/fuse.conf /etc/
-COPY /home/ec2-user/Ike/s3fs-key ./
-RUN mkdir /mnt/my-bucket
-RUN s3fs ike-bucket-small /mnt/my-bucket -o passwd_file=s3fs-key -o use_cache=/tmp/bucket-cache -o allow_other
+
+
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
+RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && mkdir /mnt/my-bucket && mkdir /tmp/bucket-cache
+COPY /home/maintuser/IFotos-db/s3fs-key db/
+RUN s3fs ike-bucket-small /mnt/my-bucket -o passwd_file=db/s3fs-key -o use_cache=/tmp/bucket-cache -o allow_other
 #RUN /usr/bin/pip3 install -r requirements.txt
 
 # Set default command

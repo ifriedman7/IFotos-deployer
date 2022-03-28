@@ -336,6 +336,11 @@
         src: IFotos-db/
         dest: /home/{{ user }}/IFotos-db
 
+    - name: Copy s3fs key file to node - change
+      copy:
+        src: /home/ec2-user/Ike/s3fs-key
+        dest: /home/{{ user }}/IFotos-db/
+
     - name: Run the ifotos container
       shell:
         cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos -d ifotos
