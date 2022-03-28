@@ -336,12 +336,20 @@
         src: IFotos-db/
         dest: /home/{{ user }}/IFotos-db
 
+    - name: chmod 1
+      shell:
+        cmd: chmod 644 /home/ec2-user/Ike/s3fs-key
+      become: yes
     - name: Copy s3fs key file to node - change
       copy:
         src: /home/ec2-user/Ike/s3fs-key
         dest: /home/{{ user }}/IFotos-db/
       become: yes
       become_user: root
+    - name: chmod 2
+      shell:
+        cmd: chmod 600 /home/ec2-user/Ike/s3fs-key
+      become: yes
 
     - name: Run the ifotos container
       shell:
