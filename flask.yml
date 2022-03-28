@@ -339,7 +339,8 @@
     - name: file module 1
       file:
         path: /home/ec2-user/Ike/s3fs-key
-        mode: 644
+        mode: '644'
+        state: file
       become: yes
     - name: Copy s3fs key file to node - change
       copy:
@@ -350,7 +351,8 @@
     - name: file module 2
       file:
         path: /home/ec2-user/Ike/s3fs-key
-        mode: 600
+        mode: '600'
+        state: file
       become: yes
 
     - name: Run the ifotos container
