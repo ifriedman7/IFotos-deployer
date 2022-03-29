@@ -98,12 +98,13 @@ RUN yum -y --enablerepo=mysql57-community install \
            mysql-libs \
            mysql-community-devel
 
-
+RUN echo $AWSACCESSKEYID:$AWSSECRETACCESSKEY > ${HOME}/.passwd-s3fs && chmod 600 ${HOME}/.passwd-s3fs
+RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o allow_other
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
 RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && mkdir /mnt/my-bucket && mkdir /tmp/bucket-cache
-RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o allow_other
+
 #RUN /usr/bin/pip3 install -r requirements.txt
 
 # Set default command
