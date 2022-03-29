@@ -337,14 +337,14 @@
         src: IFotos-db/
         dest: /home/{{ user }}/IFotos-db
 
-    - name: Build and Run the ifotos container
-      shell:
-        cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos -d ifotos
-        warn: false
-
     - name: Build and Run the ifotosdb container
       shell:
         cmd: cd IFotos-db && docker build --build-arg AWSACCESSKEYID={{ aws_access_key }} --build-arg AWSSECRETACCESSKEY={{ aws_secret_key }} --no-cache -t ifotosdb . && docker run -p 3306:3306 --name ifotosdb -d ifotosdb
+        warn: false
+
+    - name: Build and Run the ifotos container
+      shell:
+        cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos -d ifotos
         warn: false
 
   #    docker_compose:
