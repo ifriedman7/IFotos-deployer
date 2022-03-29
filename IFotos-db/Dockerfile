@@ -105,7 +105,7 @@ RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
 RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && mkdir /mnt/my-bucket && mkdir /tmp/bucket-cache
 COPY /home/maintuser/IFotos-db/s3fs-key db/
-RUN s3fs ike-bucket-small /mnt/my-bucket -o passwd_file=db/s3fs-key -o use_cache=/tmp/bucket-cache -o allow_other
+RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o allow_other
 #RUN /usr/bin/pip3 install -r requirements.txt
 
 # Set default command

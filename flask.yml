@@ -336,23 +336,6 @@
         src: IFotos-db/
         dest: /home/{{ user }}/IFotos-db
 
-    - name: chmod command
-      command:
-        cmd: sudo chmod 644 /home/ec2-user/Ike/s3fs-key
-        warn: false
-      become: yes
-    - name: Copy s3fs key file to node - change
-      copy:
-        src: /home/ec2-user/Ike/s3fs-key
-        dest: /home/{{ user }}/IFotos-db/
-      become: yes
-      become_user: root
-    - name: chmod command 2
-      command:
-        cmd: sudo chmod 600 /home/ec2-user/Ike/s3fs-key
-        warn: false
-      become: yes
-
     - name: Run the ifotos container
       shell:
         cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos -d ifotos
@@ -360,7 +343,7 @@
 
     - name: Run the ifotosdb container
       shell:
-        cmd: cd IFotos-db && docker build --no-cache -t ifotosdb . && docker run -p 3306:3306 --name ifotosdb -d ifotosdb
+        cmd: cd IFotos-db && docker build --build-arg AWSACCESSKEYID={{ aws_access_key }} --build-arg AWSSECRETACCESSKEY={{ aws_secret_key }} --no-cache -t ifotosdb . && docker run -p 3306:3306 --name ifotosdb -d ifotosdb
         warn: false
 
   #    docker_compose:
