@@ -102,8 +102,8 @@ RUN yum -y --enablerepo=mysql57-community install \
 RUN mkdir /mnt/my-bucket && \
     mkdir /tmp/bucket-cache && \
     echo $AWSACCESSKEYID:$AWSSECRETACCESSKEY > ${HOME}/.passwd-s3fs && \
-    cat ${HOME}/.passwd-s3fs && \
     chmod 600 ${HOME}/.passwd-s3fs
+RUN echo ${HOME}/.passwd-s3fs
 RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o passwd_file=${HOME}/.passwd-s3fs -o ibm_iam_auth -o allow_other
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
