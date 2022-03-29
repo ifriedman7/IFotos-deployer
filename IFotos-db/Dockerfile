@@ -79,7 +79,7 @@ RUN yum -y install \
            python-rhsm \
            rootfiles \
            yum-utils \
-           epel-release
+           epel-release \
            htop \
            httpd \
            s3fs-fuse \
