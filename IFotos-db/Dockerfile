@@ -6,9 +6,7 @@ LABEL RUN="docker run -it --name NAME --privileged --ipc=host --net=host --pid=h
 
 RUN [ -e /etc/yum.conf ] && sed -i '/tsflags=nodocs/d' /etc/yum.conf || true
 
-# Reinstall all packages to get man pages for them
-#RUN yum -y reinstall "*" && yum clean all
-
+RUN rpm -Uvh --replacepkgs https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 # Swap out the systemd-container package and install all useful packages
 RUN yum -y install \
            kernel \
@@ -86,6 +84,7 @@ RUN yum -y install \
            s3fs-fuse \
            fuse \
            && yum clean all
+
 
 #mysql server stuff
 RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
