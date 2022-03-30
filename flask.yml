@@ -216,6 +216,12 @@
         state: started
         enabled: yes
 
+ #   - name: Stop auditd
+ #     command: /sbin/service auditd stop
+ #     become: yes
+ #[root@ip-172-31-90-28 ~]# lvreduce --resizefs -L 512m VolGroup00/auditVol
+ #Do you want to unmount "/var/log/audit" ? [Y|n] y
+
     - name: Shrink Volume auditVol
       lvol:
         vg: VolGroup00
@@ -295,10 +301,10 @@
  #   - name: Install packages
  #     yum:  # name={{item}} state=present
  #       name:
- #   - name: Upgrade pip2 
- #     shell: 
- #       cmd: pip install -U pip
-  #      warn: false
+    - name: Upgrade pip2 
+      shell: 
+        cmd: pip install -U pip
+        warn: false
 
     - name: Pip setup for ansible
       pip:
