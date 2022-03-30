@@ -220,7 +220,7 @@
       lvol:
         vg: VolGroup00
         lv: auditVol
-        size: 512
+        size: 512m
         shrink: yes
         resizefs: yes
         force: yes
