@@ -374,7 +374,7 @@
   tasks:
     - name: Check that application is reachable through ELB
       uri:
-        url: "http://{{ elb.dns_name }}:3000"
+        url: "http://{{ elb.dns_name }}:80"
 
     - debug:
-        msg: "Website reachable on http://{{ elb.dns_name }}:3000"
+        msg: "Website reachable on http://{{ elb.dns_name }}:80"
