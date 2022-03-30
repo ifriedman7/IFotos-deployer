@@ -155,46 +155,6 @@
     - vars.yml
     - /home/ec2-user/ansible/aws_keys.yml
   tasks:
-    - name: Shrink Volume auditVol
-      lvol:
-        vg: VolGroup00
-        lv: auditVol
-        size: 512
-        shrink: yes
-        resizefs: yes
-        force: yes
-
-    - name: Extend partition to fill all available space (parted module does not work to resize)
-      shell:
-        cmd: echo -e "resizepart 2 100%\nquit\n"| parted /dev/xvda ---pretend-input-tty
-      become: yes
-    - name: pvresize
-      shell:
-        cmd: pvresize /dev/xvda2
-      become: yes
-
-    - name: Increase Volume varVol
-      lvol:
-        vg: VolGroup00
-        lv: varVol
-        size: 14g
-        resizefs: yes
-        force: yes
-    - name: Increase Volume rootVol
-      lvol:
-        vg: VolGroup00
-        lv: rootVol
-        size: 7g
-        resizefs: yes
-        force: yes
-    - name: Increase Volume homeVol
-      lvol:
-        vg: VolGroup00
-        lv: homeVol
-        size: 3g
-        resizefs: yes
-        force: yes
-
     - name: "Download EPEL RPM"
       get_url:
         url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -256,32 +216,71 @@
         state: started
         enabled: yes
 
-    - name: Add Mysql GPG key
+    - name: Shrink Volume auditVol
+      lvol:
+        vg: VolGroup00
+        lv: auditVol
+        size: 512
+        shrink: yes
+        resizefs: yes
+        force: yes
+
+    - name: Extend partition to fill all available space (parted module does not work to resize)
       shell:
-        cmd: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-        warn: false
-        
-    - name: Install Mysql repo
+        cmd: echo -e "resizepart 2 100%\nquit\n"| parted /dev/xvda ---pretend-input-tty
+      become: yes
+    - name: pvresize
       shell:
-        cmd: sudo rpm -ivh --replacepkgs https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
-        warn: false
-    - name: Configure Mysql repo - Disable all
-      shell:
-        cmd: sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
-        warn: false
-    - name: Install mysql community server
-      yum:
-        name: 
-          - mysql-devel
-          - mysql
-          - mysql-common
-          - mysql-libs
-  #        - MySQL-python
- #         - libmysqlclient-devel
-          - gcc
-          - mysql-community-server
-        state: present
-        enablerepo: mysql57-community
+        cmd: pvresize /dev/xvda2
+      become: yes
+
+    - name: Increase Volume varVol
+      lvol:
+        vg: VolGroup00
+        lv: varVol
+        size: 14g
+        resizefs: yes
+        force: yes
+    - name: Increase Volume rootVol
+      lvol:
+        vg: VolGroup00
+        lv: rootVol
+        size: 7g
+        resizefs: yes
+        force: yes
+    - name: Increase Volume homeVol
+      lvol:
+        vg: VolGroup00
+        lv: homeVol
+        size: 3g
+        resizefs: yes
+        force: yes
+
+ #   - name: Add Mysql GPG key
+ #     shell:
+ #       cmd: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+ #       warn: false
+ #       
+ #   - name: Install Mysql repo
+ #     shell:
+ #       cmd: sudo rpm -ivh --replacepkgs https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
+ #       warn: false
+ #   - name: Configure Mysql repo - Disable all
+ #     shell:
+ #       cmd: sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
+ #       warn: false
+ #   - name: Install mysql community server
+ #     yum:
+ #       name: 
+ #         - mysql-devel
+ #         - mysql
+ #         - mysql-common
+ #         - mysql-libs
+ #         - gcc
+ #         - mysql-community-server
+ #       state: present
+ #       enablerepo: mysql57-community
+ 
  #   - name: Starting and Enabling mysql service (in container)
   #    service:
    #     name: mysqld
