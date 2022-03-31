@@ -110,11 +110,11 @@ RUN mkdir /mnt/my-bucket && \
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
-RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ 
+RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
 
 #RUN /usr/bin/pip3 install -r requirements.txt
 EXPOSE 3306
 # Set default command
-CMD ["/IFotos/db/my_mount.sh", "/bin/bash"]
+CMD ["db/my_mount.sh", "/bin/bash"]
 #ENTRYPOINT [ "/usr/bin/bash" ]
 
