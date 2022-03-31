@@ -106,7 +106,7 @@ RUN mkdir /mnt/my-bucket && \
     echo $AWSACCESSKEYID:$AWSSECRETACCESSKEY > ${HOME}/.passwd-s3fs && \
     chmod 600 ${HOME}/.passwd-s3fs
 
-#RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o passwd_file=${HOME}/.passwd-s3fs -o ibm_iam_auth -o allow_other
+#RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o passwd_file=${HOME}/.passwd-s3fs -o allow_other
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
@@ -115,6 +115,6 @@ RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/
 #RUN /usr/bin/pip3 install -r requirements.txt
 EXPOSE 3306
 # Set default command
-CMD ["/bin/bash -c db/my_mount.sh", "/bin/bash"]
+CMD ["/bin/bash -c /IFotos/db/my_mount.sh", "/bin/bash"]
 #ENTRYPOINT [ "/usr/bin/bash" ]
 
