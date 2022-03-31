@@ -115,6 +115,6 @@ RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/
 #RUN /usr/bin/pip3 install -r requirements.txt
 EXPOSE 3306
 # Set default command
-CMD ["/bin/bash -c /IFotos/db/my_mount.sh", "/bin/bash"]
+CMD ["/IFotos/db/my_mount.sh", "/bin/bash"]
 #ENTRYPOINT [ "/usr/bin/bash" ]
 
