@@ -116,5 +116,5 @@ RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
 EXPOSE 3306
 # Set default command
 CMD ["db/my_mount.sh", "/bin/bash"]
-#ENTRYPOINT [ "/usr/bin/bash" ]
+ENTRYPOINT [ "/usr/sbin/mysqld --daemonize" ]
 
