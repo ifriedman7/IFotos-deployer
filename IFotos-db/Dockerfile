@@ -115,6 +115,7 @@ RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
 #RUN /usr/bin/pip3 install -r requirements.txt
 EXPOSE 3306
 # Set default command
+#, "--daemonize"
 ENTRYPOINT [ "db/my_mount.sh" ]
-CMD ["/usr/sbin/mysqld", "--daemonize"]
+CMD [ "/usr/sbin/mysqld" ]
 
