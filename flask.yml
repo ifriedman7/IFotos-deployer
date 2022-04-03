@@ -344,12 +344,12 @@
 
     - name: Build and Run the ifotosdb container
       shell:
-        cmd: cd IFotos-db && docker build --build-arg AWSACCESSKEYID={{ aws_access_key }} --build-arg AWSSECRETACCESSKEY={{ aws_secret_key }} --no-cache -t ifotosdb . && docker run -p 3306:3306 --name ifotosdb --device /dev/fuse --privileged --detach ifotosdb
+        cmd: cd IFotos-db && docker build --build-arg AWSACCESSKEYID={{ aws_access_key }} --build-arg AWSSECRETACCESSKEY={{ aws_secret_key }} --no-cache -t ifotosdb . && docker run -p 3306:3306 --net db --name ifotosdb --device /dev/fuse --privileged --detach ifotosdb
         warn: false
 
     - name: Build and Run the ifotos container
       shell:
-        cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --name ifotos --detach ifotos
+        cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --net db --name ifotos --detach ifotos
         warn: false
 
   #    docker_compose:
