@@ -111,7 +111,7 @@ RUN mkdir /mnt/my-bucket && \
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
 RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
-RUN ln -sf /dev/stdout /var/log/mysqld.log && ln -sf /dev/stderr /var/log/mysql/log.err
+#RUN ln -sf /dev/stdout /var/log/mysqld.log && ln -sf /dev/stderr /var/log/mysql/log.err
 #RUN /usr/bin/pip3 install -r requirements.txt
 EXPOSE 3306
 # Set default command
