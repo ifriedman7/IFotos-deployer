@@ -115,6 +115,6 @@ RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
 #RUN /usr/bin/pip3 install -r requirements.txt
 EXPOSE 3306
 # Set default command
-CMD ["db/my_mount.sh", "/bin/bash"]
-ENTRYPOINT [ "db/my_mount.sh", "&&", "/usr/sbin/mysqld" ]
+#CMD ["db/my_mount.sh", "/bin/bash"]
+ENTRYPOINT [ "db/my_mount.sh", "&&", "/usr/sbin/mysqld", "&&", "/bin/bash" ]
 
