@@ -377,6 +377,16 @@
   vars_files:
     - vars.yml  
   tasks:
+    - name: elb target
+      elb_target:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        state: present
+        target_group_name: "{{ target_group }}"
+        region: "{{ region }}"
+        target_id: "{{ item.instance_id }}"
+        target_port: 3000
+      loop: "{{ ec2.instances }}"
     - name: Check that application is reachable through ELB
       uri:
         url: "http://{{ elb.dns_name }}:80"

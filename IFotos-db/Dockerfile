@@ -106,16 +106,14 @@ RUN mkdir /mnt/my-bucket && \
     echo $AWSACCESSKEYID:$AWSSECRETACCESSKEY > ${HOME}/.passwd-s3fs && \
     chmod 600 ${HOME}/.passwd-s3fs
 
-#RUN s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o passwd_file=${HOME}/.passwd-s3fs -o allow_other
+#RUN (in runtime my_mount.sh) s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o passwd_file=${HOME}/.passwd-s3fs -o allow_other
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
 RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
-#RUN ln -sf /dev/stdout /var/log/mysqld.log && ln -sf /dev/stderr /var/log/mysql/log.err
-#RUN /usr/bin/pip3 install -r requirements.txt
+#RUN (in runtime my_mount.sh) ln -sf /dev/stdout /var/log/mysqld.log
 EXPOSE 3306
 # Set default command
-#, "--daemonize"
 ENTRYPOINT [ "db/my_mount.sh" ]
 CMD [ "/usr/sbin/mysqld" ]
 
