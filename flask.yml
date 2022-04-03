@@ -342,6 +342,10 @@
         src: IFotos-db/
         dest: /home/{{ user }}/IFotos-db
 
+    - name: Create network db
+      docker_network:
+        name: db
+
     - name: Build and Run the ifotosdb container
       shell:
         cmd: cd IFotos-db && docker build --build-arg AWSACCESSKEYID={{ aws_access_key }} --build-arg AWSSECRETACCESSKEY={{ aws_secret_key }} --no-cache -t ifotosdb . && docker run -p 3306:3306 --net db --name ifotosdb --device /dev/fuse --privileged --detach ifotosdb
