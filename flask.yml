@@ -318,13 +318,8 @@
     - name: Pip setup for python3
       pip:
         name:
-  #        - Flask
- #         - mysqlclient
- #         - pymysql
- #         - Flask-MySQLdb
           - docker
           - docker-compose
- #         - flask-mysqldb
         state: latest  
    #     virtualenv: /home/{{ user }}/{{ app_name }}
    #     virtualenv_python: python3.6
