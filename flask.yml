@@ -338,8 +338,9 @@
         dest: /home/{{ user }}/IFotos-db
 
     - name: Create network db
-      docker_network:
-        name: db
+      shell:
+        cmd: docker network create db
+        warn: false
 
     - name: Build and Run the ifotosdb container
       shell:
