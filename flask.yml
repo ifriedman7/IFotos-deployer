@@ -55,10 +55,8 @@
         network:
           groups: 
           - "{{ sg.group_id }}"
-  #        - "{{ elb.elb.security_group_ids | first }}"
         security_groups:
         - "{{ sg.group_id }}"
-  #      - "{{ elb.elb.security_group_ids | first }}"
         instance_type: "{{ instance_type }}"
         volumes:
         - device_name: /dev/sda1
@@ -69,7 +67,6 @@
         wait: true 
         region: "{{ region }}"
         key_name: "{{ keypair }}"
-        # count: "{{ count }}" no longer supported
         tags: "{{ infra_tags }}"
       register: ec2
 
@@ -106,7 +103,6 @@
         listeners:
           - Protocol: HTTP
             Port: 80
- #           instance_port: 3000
             DefaultActions:
               - Type: forward # Required. Only 'forward' is accepted at this time
                 TargetGroupArn: "{{ tg.target_group_arn }}" # Required. The ARN of the target group
@@ -125,26 +121,6 @@
   #        healthy_threshold: 2
   #      tags: "{{ infra_tags }}"
       register: elb
-
- #   - name: Instance Register
- #     elb_instance:
- #       aws_access_key: "{{ aws_access_key }}"
- #       aws_secret_key: "{{ aws_secret_key }}"
- #       instance_id: "{{ item.instance_id }}"
- #       ec2_elbs: "{{ load_balancer }}"
- #       region: "{{ region }}"
- #       state: present
- #     loop: "{{ ec2.instances }}"
-
- #   - name: Attach EC2 instance to ELB
- #     ec2_elb:
- #       aws_access_key: "{{ aws_access_key }}"
- #       aws_secret_key: "{{ aws_secret_key }}"
- #       state: present
- #       ec2_elbs: "{{ load_balancer }}"
- #       region: "{{ region }}"
- #       instance_id: "{{ item.instance_id }}"
- #     loop: "{{ ec2.instances }}"
 
 - hosts: remote
   remote_user: maintuser
@@ -216,9 +192,6 @@
         state: started
         enabled: yes
 
- #   - name: Stop auditd
- #     command: /sbin/service auditd stop
- #     become: yes
  #[root@ip-172-31-90-28 ~]# lvreduce --resizefs -L 512m VolGroup00/auditVol
  #Do you want to unmount "/var/log/audit" ? [Y|n] y
 
@@ -262,45 +235,11 @@
         resizefs: yes
         force: yes
 
- #   - name: Add Mysql GPG key
- #     shell:
- #       cmd: sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
- #       warn: false
- #       
- #   - name: Install Mysql repo
- #     shell:
- #       cmd: sudo rpm -ivh --replacepkgs https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
- #       warn: false
- #   - name: Configure Mysql repo - Disable all
- #     shell:
- #       cmd: sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
- #       warn: false
- #   - name: Install mysql community server
- #     yum:
- #       name: 
- #         - mysql-devel
- #         - mysql
- #         - mysql-common
- #         - mysql-libs
- #         - gcc
- #         - mysql-community-server
- #       state: present
- #       enablerepo: mysql57-community
- 
- #   - name: Starting and Enabling mysql service (in container)
-  #    service:
-   #     name: mysqld
-  #      state: started
-  #      enabled: yes
-
     - name: Install Docker-compose 
       shell: 
         cmd: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         warn: false
 
- #   - name: Install packages
- #     yum:  # name={{item}} state=present
- #       name:
     - name: Upgrade pip2 
       shell: 
         cmd: pip install -U pip
@@ -321,16 +260,11 @@
           - docker
           - docker-compose
         state: latest  
-   #     virtualenv: /home/{{ user }}/{{ app_name }}
-   #     virtualenv_python: python3.6
-   #     virtualenv_site_packages: yes
         executable: /usr/bin/pip3
     - name: Copy IFotos folder to node
       copy:
         src: IFotos/
         dest: /home/{{ user }}/{{ app_name }}
-  #    git:
-  #      repo: https://github.com/ifriedman7/IFotos.git
 
     - name: Copy IFotos-db folder to node
       copy:
@@ -352,25 +286,6 @@
         cmd: cd IFotos && docker build --no-cache -t ifotos . && docker run -p 3000:3000 --net db --name ifotos --detach ifotos
         warn: false
 
-  #    docker_compose:
-  #      project_src: /home/{{ user }}/{{ app_exe }}
-  #      state: present
-
-  #  - name: Create nginx config
-  #    template:
-  #      src: nginx.j2
-  #      dest: /etc/nginx/sites-available/{{ app_name }}
-  #  - name: Remove default nginx site config
-  #    file: path=/etc/nginx/sites-enabled/default state=absent
-  #  - name: Enable nginx site
-  #    file:
-  #      src: /etc/nginx/sites-available/{{ app_name }}
-  #      dest: /etc/nginx/sites-enabled/default
-  #      state: link
-  #      force: yes
-  #  - name: Restart nginx
-  #    systemd: name=nginx state=restarted enabled=yes
- 
 - hosts: local
   connection: local
   gather_facts: False
