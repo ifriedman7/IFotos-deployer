@@ -12,7 +12,7 @@ RUN rpm -Uvh --replacepkgs https://dl.fedoraproject.org/pub/epel/epel-release-la
 # Swap out the systemd-container package and install all useful packages
 RUN yum -y install \
            epel-release \
-           git
+           git \
            s3fs-fuse \
            fuse \
            && yum clean all
