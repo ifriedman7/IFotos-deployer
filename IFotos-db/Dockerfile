@@ -11,83 +11,11 @@ RUN [ -e /etc/yum.conf ] && sed -i '/tsflags=nodocs/d' /etc/yum.conf || true
 RUN rpm -Uvh --replacepkgs https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 # Swap out the systemd-container package and install all useful packages
 RUN yum -y install \
-           kernel \
-           e2fsprogs \
-           sos \
-           crash \
-           strace \
-           ltrace \
-           tcpdump \
-           abrt \
-           pcp \
-           systemtap \
-           perf \
-           bc \
-           blktrace \
-           btrfs-progs \
-           ethtool \
-           file \
-           findutils \
-           gcc \
-           gdb \
-           git \
-           glibc-common \
-           glibc-utils \
-           hwloc \
-           iotop \
-           iproute \
-           iputils \
-           less \
-           pciutils \
-           ltrace \
-           mailx \
-           man-db \
-           nc \
-           netsniff-ng \
-           net-tools \
-           numactl \
-           numactl-devel \
-           passwd \
-           perf \
-           procps-ng \
-           psmisc \
-           screen \
-           strace \
-           sysstat \
-           systemtap-client \
-           tar \
-           tcpdump \
-           xauth \
-           which \
-           ostree \
-           rpm-ostree \
-           docker \
-           python-docker-py \
-           docker-selinux \
-           python-pip \
-           python-devel \
-           python2-pip \
-           python-setuptools \
-           python3 \
-           python3-pip \
-           python-virtualenv \
-           python3-devel \
-           libselinux-python3 \
-           kubernetes-client \
-           kubernetes-node \
-           kubernetes-devel \
-           kubernetes-master \
-           gdb-gdbserver \
-           python-rhsm \
-           rootfiles \
-           yum-utils \
            epel-release \
-           htop \
-           httpd \
+           git
            s3fs-fuse \
            fuse \
            && yum clean all
-
 
 #mysql server stuff
 RUN rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
@@ -106,12 +34,11 @@ RUN mkdir /mnt/my-bucket && \
     echo $AWSACCESSKEYID:$AWSSECRETACCESSKEY > ${HOME}/.passwd-s3fs && \
     chmod 600 ${HOME}/.passwd-s3fs
 
-#RUN (in runtime my_mount.sh) s3fs ike-bucket-small /mnt/my-bucket -o use_cache=/tmp/bucket-cache -o passwd_file=${HOME}/.passwd-s3fs -o allow_other
 
 RUN git clone https://github.com/ifriedman7/IFotos.git
 WORKDIR IFotos
 RUN cp db/my.cnf /etc/ && cp db/fuse.conf /etc/ && chmod +x db/my_mount.sh
-#RUN (in runtime my_mount.sh) ln -sf /dev/stdout /var/log/mysqld.log
+
 EXPOSE 3306
 # Set default command
 ENTRYPOINT [ "db/my_mount.sh" ]
