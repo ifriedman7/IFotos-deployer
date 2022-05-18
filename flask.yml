@@ -253,7 +253,8 @@
           - pip==20.3.4 # 20.3.1
           - wheel==0.36.2
           - selinux
-        state: latest
+ #       state: latest
+        state: present
         extra_args: --disable-pip-version-check --no-cache-dir 
     - name: Pip setup for python3
       pip:
