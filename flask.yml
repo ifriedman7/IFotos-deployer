@@ -194,6 +194,7 @@
 
  #[root@ip-172-31-90-28 ~]# lvreduce --resizefs -L 512m VolGroup00/auditVol
  #Do you want to unmount "/var/log/audit" ? [Y|n] y
+#service auditd stop
 
     - name: Shrink Volume auditVol
       lvol:
@@ -240,10 +241,10 @@
         cmd: curl -L "https://github.com/docker/compose/releases/download/2.3.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         warn: false
 
-    - name: Upgrade pip2 
-      shell: 
-        cmd: pip install -U pip
-        warn: false
+#    - name: Upgrade pip2 - stuck-maybe dont need
+#      shell: 
+#        cmd: pip install -U pip
+#        warn: false
 
     - name: Pip setup for ansible
       pip:
