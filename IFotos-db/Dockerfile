@@ -29,7 +29,8 @@ RUN yum -y --enablerepo=mysql57-community install \
            mysql-libs \
            mysql-community-devel
 
-RUN mkdir /mnt/my-bucket && \
+#Change /mnt/my-bucket to /var/s3fs as per s3provider
+RUN mkdir /var/s3fs && \
     mkdir /tmp/bucket-cache && \
     echo $AWSACCESSKEYID:$AWSSECRETACCESSKEY > ${HOME}/.passwd-s3fs && \
     chmod 600 ${HOME}/.passwd-s3fs
