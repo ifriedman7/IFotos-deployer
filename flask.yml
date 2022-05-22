@@ -4,7 +4,7 @@
   gather_facts: false
   vars_files:
     - vars.yml
-    - /home/ec2-user/ansible/aws_keys.yml
+    - aws_keys.yml
   tasks:
     - name: Create security group for EC2
       ec2_group:
