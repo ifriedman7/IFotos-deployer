@@ -247,16 +247,16 @@
 #        cmd: pip install -U pip
 #        warn: false
 
-    - name: Pip setup for ansible
-      pip:
-        name: 
-          - setuptools==44.1.1 # 20.3.1
-          - pip==20.3.4 # 20.3.1
-          - wheel==0.36.2
-          - selinux
+ #   - name: Pip setup for ansible --skipping
+ #     pip:
+ #       name: 
+ #         - setuptools==44.1.1 # 20.3.1
+ #         - pip==20.3.4 # 20.3.1
+ #         - wheel==0.36.2
+ #         - selinux
  #       state: latest
-        state: present
-        extra_args: --disable-pip-version-check --no-cache-dir 
+  #      state: present
+  #      extra_args: --disable-pip-version-check --no-cache-dir 
     - name: Pip setup for python3
       pip:
         name:
