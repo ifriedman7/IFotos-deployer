@@ -20,25 +20,6 @@ Deploy a python application (IFotos) to EC2 instances using Ansible
 
 ## Setup
 
-### AWS Access Key
-
-- Wrap your AWS credentials in an Ansible Vault file that are expected to contain two variables : `aws_access_key` and `aws_secret_key`
-- The playbooks expect the the Vault file to be named `aws_keys.yml`
-
-```
-ansible-vault create aws_keys.yml
-[type in a password]
-[type in aws_access_key: ...]
-[type in aws_secret_key: ...]
-```
-
-### AWS EC2 SSH key
-
-- Add your EC2 private ssh key in the `ansible.cfg` file :
-
-```
-private_key_file = /Users/myself/key.pem
-```
 
 ### Review settings
 
